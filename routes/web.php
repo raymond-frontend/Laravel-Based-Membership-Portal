@@ -1,0 +1,67 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+use App\User;
+use Illuminate\Support\Facades\Input;
+
+Event::listen('illuminate.query.*', function($query){
+    var_dump($query);
+});
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Auth::routes(['verify' => true]);
+
+Route::get('home', 'HomeController@index')->name('home')->middleware('verified');
+
+/****Route::get('/csv', 'CsvFile@index')->name('importPage');
+Route::post('csv/import', 'CsvFile@csv_import')->name('import');***/
+
+//Users Route
+Route::get('users', 'UsersController@index')->name('users');
+Route::get('users/profile/{slug}', 'UsersController@show')->name('user');
+Route::get('users/edit/{id}', 'UsersController@edit')->name('editUser')->where('id', '\d+');
+Route::put('users/edit/{id}', 'UsersController@update')->name('update')->where('id', '\d+');
+Route::patch('users/edit/{id}', 'UsersController@changeAvatar')->name('changeAvatar')->where('id', '\d+');
+
+//Admin User Route
+Route::get('admin/users', 'AdminUsersController@index')->name('adminUsers');
+Route::get('admin/users/verified', 'AdminUsersController@verified')->name('adminVerified');
+Route::get('admin/users/pending', 'AdminUsersController@pending')->name('adminPending');
+Route::get('admin/users/banned', 'AdminUsersController@banned')->name('adminBanned');
+Route::get('admin/users/profile/{id}', 'AdminUsersController@show')->name('adminUser')->where('id', '\d+');
+Route::get('admin/users/edit/{id}', 'AdminUsersController@edit')->name('adminEditUser')->where('id', '\d+');
+Route::put('admin/users/edit/{id}', 'AdminUsersController@update')->name('adminUpdateUser')->where('id', '\d+');
+Route::get('admin/{id}', ['uses'=>'AdminUsersController@destroy', 'as' => 'deleteUser', 'middleware' => 'auth']);
+
+//Posts Route
+Route::get('admin_user/announcements', 'PostController@index')->name('adminPosts');
+Route::get('admin_user/post/{id}', 'PostController@show')->name('post')->where('id', '\d+');
+Route::get('admin_user/create_announcement', 'PostController@createAnnouncement')->name('makeAnnouncement');
+Route::any('admin_user/posts/announcement', 'PostController@create')->name('adminPost');
+Route::get('post/{id}', 'PostController@show')->name('post')->where('id', '\d+');
+Route::get('admin_user/post/edit/{id}', 'PostController@edit')->name('editPost')->where('id', '\d+');
+Route::put('admin_user/post/update/{id}', 'PostController@update')->name('updatePost')->where('id', '\d+');
+Route::get('admin_user/post/delete/{id}', 'PostController@destroy')->name('deletePost')->where('id', '\d+');
+
+//search
+Route::any('/search', function(){
+    $q = Input::get('q');
+    $user = User::where('name', 'LIKE', '%'.$q.'%')->orWhere('email', 'LIKE', '%'.$q.'%')->get();
+    if(count($user) > 0){
+        return view('users.result')->withDetails($user)->withQuery($q);
+    }else{
+        return redirect()->back()->withErrors(['msg' =>['Member not found']]);
+    }
+} )->name('search');
