@@ -24,6 +24,8 @@ class AdminUsersController extends Controller
         if(Auth::check()){
             if(Auth::User()->isAdmin()){
              return view('admin.users.index', compact('users', 'latestUsers', 'pendingUsers', 'verifiedUsers'));
+        }elseif (Auth::User() == null) {
+            return redirect()->route('welcome');
         }else{
             return redirect()->route('home');
         }

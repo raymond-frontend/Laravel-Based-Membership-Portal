@@ -69,8 +69,9 @@ Welcome
                     <i  class="hamburger align-self-center"></i>
                 </a>
 
-                <form class="form-inline d-none d-sm-inline-block">
-                    <input class="form-control form-control-no-border mr-sm-2" type="text" placeholder="Search other members..." aria-label="Search">
+               <form action="{{route('search')}}" method="POST"role="search" class="form-inline d-none d-sm-inline-block">
+                {{ csrf_field() }}
+                    <input class="form-control form-control-no-border mr-sm-2" type="text" name="q" placeholder="Search other members..." aria-label="Search">           
                 </form>
 
                 <div class="navbar-collapse collapse">

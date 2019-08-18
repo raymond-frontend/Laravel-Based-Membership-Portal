@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Auth;
+use Carbon\Carbon;
 
 
 
@@ -25,22 +26,42 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     protected function authenticated(Request $request, $user){
+         
         
         switch ($user) {
-            case ($user->getDays() == true):
+            case ($user->membergroup->name == 'Owing'):
+                $user-> update([
+                'last_login_at' =>Carbon::now()->toDateTimeString(),
+                'last_login_ip' => $request->getClientIp()
+                ]);
                 Auth::logout();
-                 return redirect('/login')->withErrors(['msg' => 'Pay up your dues']);
+                 return redirect('/login')->withErrors(['msg' => 'Please pay up your dues. Contact the secretariat on info@icmc.org']);
                 break;
             case ($user->isAdmin()):
+                $user-> update([
+                'last_login_at' =>Carbon::now()->toDateTimeString(),
+                'last_login_ip' => $request->getClientIp()
+                ]);
                 return redirect()->route('adminUsers');
                 break;
-            case ($user->membergroup_id == '2');
-            Auth::logout();
-            return redirect('/login')->withErrors(['msg'=>'You have been banned']);   
+            case ($user->membergroup->name == 'Banned');
+                $user-> update([
+                'last_login_at' =>Carbon::now()->toDateTimeString(),
+                'last_login_ip' => $request->getClientIp()
+                ]);
+                Auth::logout();
+                return redirect('/login')->withErrors(['msg'=>'You have been banned. Contact the secretariat on info@icmc.org']);   
             default:
+                $user-> update([
+                'last_login_at' =>Carbon::now()->toDateTimeString(),
+                'last_login_ip' => $request->getClientIp()
+                ]);
                  return redirect('/home');
                 break;
+            
         }
+
+      
     }
 
  public function username(){

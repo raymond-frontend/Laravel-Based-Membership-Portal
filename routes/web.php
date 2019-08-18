@@ -58,9 +58,10 @@ Route::get('admin_user/post/delete/{id}', 'PostController@destroy')->name('delet
 //search
 Route::any('/search', function(){
     $q = Input::get('q');
-    $user = User::where('name', 'LIKE', '%'.$q.'%')->orWhere('email', 'LIKE', '%'.$q.'%')->get();
-    if(count($user) > 0){
-        return view('users.result')->withDetails($user)->withQuery($q);
+    $users = User::where('name', 'LIKE', '%'.$q.'%')->orWhere('email', 'LIKE', '%'.$q.'%')->get();
+    $verifiedUsers = $users->where('membergroup_id', '=', '3');
+    if($verifiedUsers){
+        return view('users.result', compact('verifiedUsers'))->withDetails($verifiedUsers)->withQuery($q);
     }else{
         return redirect()->back()->withErrors(['msg' =>['Member not found']]);
     }

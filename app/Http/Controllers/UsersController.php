@@ -87,6 +87,9 @@ class UsersController extends Controller
     }
 
      public function changeAvatar(Request $request, $id){
+         $this->validate($request, [
+             'avatar' => 'image|required|mimes:jpeg,png,jpg,gif,svg'
+         ]);
          if($request->hasFile('avatar')){
              $avatar = $request->file('avatar');
              $filename = time() . '.' . $avatar->getClientOriginalExtension();

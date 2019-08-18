@@ -11,10 +11,10 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
-                     <div class="form-group row" style="text-align:left !impotrant; color:red; font-weight:300 !important; font-size:14px !important; margin-left:20px !important;">
-                            <label for="refernce_id" class="col-md-8 col-form-label text-md-right"> @if($errors->any())
+                     <div class="text-center" style="color:red; line-height:20px;" >
+                            @if($errors->any())
                              <p>{{$errors->first()}}</p>
-                         @endif</label>
+                         @endif
                         </div>
 
 

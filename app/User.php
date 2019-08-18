@@ -21,7 +21,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'name', 'email', 'password', 'reference_id', 'language', 'bio', 'academics',
          'professional', 'experience', 'style','inspiration', 'membership_id','role_id',
-         'membergroup_id', 'slug'
+         'membergroup_id', 'slug', 'last_login_at', 'last_login_ip', 'location'
     ];
 
     /**
@@ -80,7 +80,7 @@ class User extends Authenticatable implements MustVerifyEmail
         $start_time = Carbon::parse($created);
         $finish_time = Carbon::parse($today);
         $result = $start_time->diffInDays($finish_time, false);
-        if($result >= 365){
+        if($result >= 1){
             return true;
         }else {
             return false;
