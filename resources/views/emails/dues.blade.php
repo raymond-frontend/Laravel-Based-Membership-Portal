@@ -22,11 +22,11 @@ Account Number: 1015308125
 
 Please, if you do not pay your dues as and when due your membership privileges will be stopped; some of which are:
 
-•your profile will no longer be visible on the ICMC website;
+• your profile will no longer be visible on the ICMC website;
 
-•you will no longer have access to your membership profile;
+• you will no longer have access to your membership profile;
 
-•you will no longer be entitled to discounted rates for continuing professional development courses, seminars and the ADR Conference of the Institute, and so on. 
+• you will no longer be entitled to discounted rates for continuing professional development courses, seminars and the ADR Conference of the Institute, and so on. 
 
 
 Thanks,<br>

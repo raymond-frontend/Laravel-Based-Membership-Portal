@@ -129,7 +129,7 @@ Welcome
 									<tbody>
                                         @foreach ($verifiedUsers as $user)
                                             <tr>
-                                                <td><img class="rounded-circle mr-3" src="/uploads/avatars/{{Auth::User()->avatar}}" alt="{{Auth::User()->name}}" width="40" height="40"></td>
+                                                <td><img class="rounded-circle mr-3" src="/uploads/avatars/{{$user->avatar}}" alt="{{$user->name}}" width="40" height="40"></td>
 											<td><a style="text-decoration:none;" href="{{route('user', $user->slug)}}">{{$user->name}}</a></td>
                                             <td class="d-none d-md-table-cell">{{$user->membership->name}}</td>
                                             <td class="d-none d-md-table-cell">

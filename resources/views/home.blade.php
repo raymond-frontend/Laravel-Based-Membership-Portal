@@ -118,15 +118,7 @@ Welcome
 									<div class="card-actions float-right">
 										
 									</div>
-									<h5 class="card-title mb-0">Welcome</h5>
-								</div>
-								<div class="card-body d-flex">
-                        
-							<p style="font-size:14px; line-height:1.7">Hello <span style="font-weight:700">{{$user->name}}</span>, welcome to ICMC membership portal. Your Membership ID is <span style="color:red;">{{$user->reference_id}}.</span> <br>
-							Should you have further enquiry kindly mail us at icmc@gmail.com. <br>
-					
-						    Kindly read  our <a href=""><span style="color:green">terms of use</span> </a>. 
-						</p>
+									<h5 class="card-title mb-0 text-center">Welcome &nbsp;<span style="color:#000; font-weight:700">{{$user->name}}</span></h5>
 								</div>
 							</div>
 						</div>

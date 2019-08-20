@@ -149,6 +149,9 @@ Welcome
 							<div><p class="profile-gutterx profile-about">Mediation Style</p></div>
 						<div class="profile-gutterxz">{{$user->style}}</div>
 						<hr class="profile-gutterx">
+						<div><p class="profile-gutterx profile-about">Active Locations</p></div>
+						<div class="profile-gutterxz">{{$user->location}}</div>	
+							<hr class="profile-gutterx">
 						<div><p class="profile-gutterx profile-about">Inspiration</p></div>
 						<div class="profile-gutterxz">{{$user->inspiration}}</div>	
 							<hr class="profile-gutterx">

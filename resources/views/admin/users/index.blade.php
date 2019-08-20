@@ -21,8 +21,9 @@ Welcome
                         <ul id="dashboards" class="sidebar-dropdown list-unstyled collapse show">
 						<li class="sidebar-item active"><a class="sidebar-link" >Home</a></li>
 						<li class="sidebar-item"><a class="sidebar-link" href="{{route('adminVerified')}}">Verified Members</a></li>
-						<li class="sidebar-item"><a class="sidebar-link" href="{{route('adminVerified')}}">Pending Users</a></li>
-						<li class="sidebar-item"><a class="sidebar-link" href="{{route('adminVerified')}}">Banned Users</a></li>
+						<li class="sidebar-item"><a class="sidebar-link" href="{{route('adminPaid')}}">Paid Dues</a></li>
+						<li class="sidebar-item"><a class="sidebar-link" href="{{route('adminPending')}}">Pending Users</a></li>
+						<li class="sidebar-item"><a class="sidebar-link" href="{{route('adminBanned')}}">Banned Users</a></li>
 						<li class="sidebar-item"><a class="sidebar-link" href="{{route('makeAnnouncement')}}">Create Announcement</a></li>
                           <!--   <li class="sidebar-item"><a class="sidebar-link" href="posts">Post</a></li>
                            <li class="sidebar-item"><a class="sidebar-link" href="dashboard-social.html">Social</a>-->
@@ -155,7 +156,7 @@ Welcome
 											<i class="feather-lg text-danger" data-feather="dollar-sign"></i>
 										</div>
 										<div class="media-body">
-											<h3 class="mb-2"></h3>
+										<h3 class="mb-2">{{$paid->count()}}</h3>
 											<div class="mb-0">Paid</div>
 										</div>
 									</div>
@@ -181,7 +182,7 @@ Welcome
 					
 					<div class="row">
 						<div class="col-md-4 mb-3"></div>
-						<div class="col-md-4 mb-3">@if(session('message'))
+						<div style="color:green" class="col-md-4 mb-3">@if(session('message'))
   							{{session('message')}}
 						@endif</div>
 						<div class="col-md-4 mb-3"></div>
@@ -191,19 +192,7 @@ Welcome
 						<div class="col-12 col-lg-6 col-xl-12 d-flex">
 							<div class="card flex-fill">
 								<div class="card-header">
-									<div class="card-actions float-right">
-										<div class="dropdown show">
-											<a href="#" data-toggle="dropdown" data-display="static">
-												<i class="align-middle" data-feather="more-horizontal"></i>
-											</a>
-
-											<div class="dropdown-menu dropdown-menu-right">
-												<a class="dropdown-item" href="#">Pending</a>
-												<a class="dropdown-item" href="#">Banned</a>
-											<a class="dropdown-item" href="{{route('adminVerified')}}">Verified</a>
-											</div>
-										</div>
-									</div>
+									
 									<h5 class="card-title mb-0">Latest Users</h5>
 								</div>
 								<table id="datatables-dashboard-projects" class="table table-striped my-0">
@@ -213,7 +202,8 @@ Welcome
 											<th class="d-none d-xl-table-cell">Membership ID</th>
 											<th class="d-none d-xl-table-cell">Registered</th>
                                             <th>Status</th>
-                                            <th>Cadre</th>
+											<th>Cadre</th>
+											<th></th>
 											<th class="d-none d-md-table-cell">Action</th>
 										</tr>
 									</thead>
@@ -241,7 +231,17 @@ Welcome
 													
 											@endswitch
 										
-                                            <td class="d-none d-md-table-cell">{{$fresh->membership->name}}</td>
+											<td class="d-none d-md-table-cell">{{$fresh->membership->name}}</td>
+												
+													
+												
+
+												@if ($fresh->paid_id == 2)
+													<td class="d-none d-md-table-cell"><span class="badge badge-success">{{$fresh->paid->name}}</span></td>
+												@else
+													<td></td>
+												@endif
+											
                                             <td class="d-none d-md-table-cell">
                                                 	<div class="card-actions float-left">
 										<div class="dropdown show">
@@ -252,7 +252,10 @@ Welcome
 											<div class="dropdown-menu dropdown-menu-right">
 											<a class="dropdown-item" href="{{route('adminUser', $fresh->id)}}"><i class="fas fa-binoculars"></i> &nbsp; View</a>
 											<a class="dropdown-item" href="{{route('adminEditUser', $fresh->id)}}"><i class="fas fa-user-edit"></i> &nbsp; Edit</a>
-											<a  class="dropdown-item" onclick="return confirm('Are you sure you want to delete this user')" href="{{route('deleteUser', $fresh->id)}}"><i class="fas fa-user-times"></i> &nbsp; Delete</a>
+											@if (Auth::User()->name !== $fresh->name)
+												<a  class="dropdown-item" onclick="return confirm('Are you sure you want to delete this user')" href="{{route('deleteUser', $fresh->id)}}"><i class="fas fa-user-times"></i> &nbsp; Delete</a>
+											@endif
+											
 											</div>
 										</div>
 									</div>
@@ -265,93 +268,18 @@ Welcome
 								</table>
 							</div>
 						</div>
+
+						
 					
 					</div>
-                    
-               <!-----    	<div class="row">
-						<div class="col-12 col-lg-6 col-xl-4 d-flex">
-							<div class="card flex-fill">
-								<div class="card-header">
-									<div class="card-actions float-right">
-										<div class="dropdown show">
-											<a href="#" data-toggle="dropdown" data-display="static">
-												<i class="align-middle" data-feather="more-horizontal"></i>
-											</a>
 
-											<div class="dropdown-menu dropdown-menu-right">
-												<a class="dropdown-item" href="#">Action</a>
-												<a class="dropdown-item" href="#">Another action</a>
-												<a class="dropdown-item" href="#">Something else here</a>
-											</div>
-										</div>
-									</div>
-									<h5 class="card-title mb-0">Announcements</h5>
-								</div>
-								<div class="card-body d-flex">
-									<div class="align-self-center w-100">
-										<div class="chart">
-											<div id="datetimepicker-dashboard"></div>
-										</div>
-									</div>
-								</div>
-							</div>
+					<div class="row">
+						<div class="col-12 col-lg-6 col-xl-12 d-flex">
+							{{$latestUsers->links()}}
 						</div>
-						<div class="col-12 col-xl-4 d-none d-xl-flex">
-							<div class="card flex-fill w-100">
-								<div class="card-header">
-									<div class="card-actions float-right">
-										<div class="dropdown show">
-											<a href="#" data-toggle="dropdown" data-display="static">
-												<i class="align-middle" data-feather="more-horizontal"></i>
-											</a>
-
-											<div class="dropdown-menu dropdown-menu-right">
-												<a class="dropdown-item" href="#">Action</a>
-												<a class="dropdown-item" href="#">Another action</a>
-												<a class="dropdown-item" href="#">Something else here</a>
-											</div>
-										</div>
-									</div>
-									<h5 class="card-title mb-0">Latest Members</h5>
-								</div>
-								<div class="card-body">
-									<div class="align-self-center w-100">
-									
-
-										<table class="table mb-0" >
-											<thead>
-												<tr>
-													<th>Name</th>
-													<th class="text-right">status</th>
-													
-												</tr>
-											</thead>
-											<tbody style="border-top:none !important;">
-												@foreach ($latestUsers as $fresh)
-														<tr >
-													
-														<td class="text-left">{{$fresh->name}}</td>
-													<td class="text-right text-success">
-														@if (Auth::User()->isOnline())
-														<span class="badge badge-success">Active</span>
-															
-														@else
-															<span class="badge badge-warning">Inactive</span>
-														@endif
-													</td>
-												</tr>
-												@endforeach
-											
-											</tbody>
-										</table>
-									</div>
-								</div>
-							
-							</div>
-						</div>
-		
-                    </div>--> 
+					</div>
                     
+             
            
 
                    

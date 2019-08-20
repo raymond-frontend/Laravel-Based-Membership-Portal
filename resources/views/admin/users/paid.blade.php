@@ -20,8 +20,9 @@ Welcome
                         </a>
                         <ul id="dashboards" class="sidebar-dropdown list-unstyled collapse show">
 						<li class="sidebar-item active"><a href="{{route('adminUsers')}}" class="sidebar-link" >Home</a></li>
-						<li class="sidebar-item"><a class="sidebar-link" href="{{route('adminVerified')}}">Verified Members</a></li>
-						<li class="sidebar-item"><a class="sidebar-link" href="{{route('adminVerified')}}">Pending Users</a></li>
+                        <li class="sidebar-item"><a class="sidebar-link" href="{{route('adminVerified')}}">Verified Members</a></li>
+                        <li class="sidebar-item"><a class="sidebar-link" href="{{route('adminPaid')}}">Paid Dues</a></li>
+						<li class="sidebar-item"><a class="sidebar-link" href="{{route('adminPending')}}">Pending Users</a></li>
 						<li class="sidebar-item"><a class="sidebar-link" href="{{route('adminVerified')}}">Banned Users</a></li>
 						<li class="sidebar-item"><a class="sidebar-link" href="{{route('makeAnnouncement')}}">Create Announcement</a></li>
                           <!--   <li class="sidebar-item"><a class="sidebar-link" href="posts">Post</a></li>
@@ -53,8 +54,9 @@ Welcome
                     <i  class="hamburger align-self-center"></i>
                 </a>
 
-                <form class="form-inline d-none d-sm-inline-block">
-                    <input class="form-control form-control-no-border mr-sm-2" type="text" placeholder="Search other members..." aria-label="Search">
+                <form action="{{route('search')}}" method="POST"role="search" class="form-inline d-none d-sm-inline-block">
+                {{ csrf_field() }}
+                    <input class="form-control form-control-no-border mr-sm-2" type="text" name="q" placeholder="Search other members..." aria-label="Search">           
                 </form>
 
                 <div class="navbar-collapse collapse">
@@ -99,10 +101,11 @@ Welcome
             <main class="content" style="background-color:#f9fcf9">
                 <div class="container-fluid p-0">
 
+                 
 					
 					<div class="row">
 						<div class="col-md-4 mb-3"></div>
-						<div style="color:red; font-weight:700;" class="col-md-4 mb-3">@if(session('message'))
+						<div class="col-md-4 mb-3">@if(session('message'))
   							{{session('message')}}
 						@endif</div>
 						<div class="col-md-4 mb-3"></div>
@@ -112,24 +115,50 @@ Welcome
 						<div class="col-12 col-lg-6 col-xl-12 d-flex">
 							<div class="card flex-fill">
 								<div class="card-header">
-								
-									<h5 class="card-title mb-0">Latest Announcements</h5>
+									<h5 class="card-title mb-0">Latest Users</h5>
 								</div>
 								<table id="datatables-dashboard-projects" class="table table-striped my-0">
 									<thead>
 										<tr>
-                                            <th>Name</th>
-                                            <th>Date Created</th>
-											<th>Action</th>
+											<th>Name</th>
+											<th class="d-none d-xl-table-cell">Membership ID</th>
+											<th class="d-none d-xl-table-cell">Registered</th>
+                                            <th>Status</th>
+                                            <th>Cadre</th>
+                                            <th></th>
+											<th class="d-none d-md-table-cell">Action</th>
 										</tr>
 									</thead>
 									
 									<tbody>
-                                        
-                                        @foreach ($posts as $post)
+                                        @foreach ($paidMembers as $fresh)
                                             <tr>
-                                            <td><a style="text-decoration:none;" href="{{route('post', $post->id)}}">{{$post->title}}</a></td>
-                                            <td>{{$post->created_at->diffForHumans()}}</td>
+											<td><a style="text-decoration:none;" href="{{route('adminUser', $fresh->id)}}">{{$fresh->name}}</a></td>
+											<td class="d-none d-xl-table-cell">{{$fresh->reference_id}}</td>
+											<td class="d-none d-xl-table-cell">{{$fresh->created_at->diffForHumans()}}</td>
+
+											@switch($fresh->membergroup_id)
+												@case(1)
+													<td><span class="badge badge-warning">{{$fresh->membergroup->name}}</span></td>
+													@break
+												@case(2)
+													<td><span class="badge badge-danger">{{$fresh->membergroup->name}}</span></td>
+													@break
+												@case(3)
+													<td><span class="badge badge-success">{{$fresh->membergroup->name}}</span></td>
+													@break
+												@case(4)
+													<td><span class="badge badge-dark">{{$fresh->membergroup->name}}</span></td>
+												@default
+													
+											@endswitch
+										
+                                            <td class="d-none d-md-table-cell">{{$fresh->membership->name}}</td>
+                                           @if ($fresh->paid_id == 2)
+													<td class="d-none d-md-table-cell"><span class="badge badge-success">{{$fresh->paid->name}}</span></td>
+												@else
+													<td></td>
+												@endif
                                             <td class="d-none d-md-table-cell">
                                                 	<div class="card-actions float-left">
 										<div class="dropdown show">
@@ -138,9 +167,9 @@ Welcome
 											</a>
 
 											<div class="dropdown-menu dropdown-menu-right">
-											<a class="dropdown-item" href="{{route('post', $post->id)}}"><i class="fas fa-binoculars"></i> &nbsp; View</a>
-                                            <a class="dropdown-item" href="{{route('editPost', $post->id)}}"><i class="fas fa-user-edit"></i> &nbsp; Edit</a>
-                                            <a  class="dropdown-item" href="{{route('deletePost', $post->id)}}" onclick="return confirm('Are you sure you want to delete this user')" href=""><i class="fas fa-user-times"></i> &nbsp; Delete</a>
+											<a class="dropdown-item" href="{{route('adminUser', $fresh->id)}}"><i class="fas fa-binoculars"></i> &nbsp; View</a>
+											<a class="dropdown-item" href="{{route('adminEditUser', $fresh->id)}}"><i class="fas fa-user-edit"></i> &nbsp; Edit</a>
+											<a  class="dropdown-item" onclick="return confirm('Are you sure you want to delete this user')" href="{{route('deleteUser', $fresh->id)}}"><i class="fas fa-user-times"></i> &nbsp; Delete</a>
 											</div>
 										</div>
 									</div>
@@ -156,16 +185,33 @@ Welcome
 					
 					</div>
                     
-        
-                    
-           
-
-                   
-                    
-
-                  
+					<div class="row">
+						<div class="col-12 col-lg-6 col-xl-12 d-flex">
+							{{$paidMembers->links()}}
+						</div>
+					</div>
 
             </main>
+
+         <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row text-muted">
+                        <div class="col-6 text-left">
+                            <ul class="list-inline">
+
+                                <li class="list-inline-item">
+                                    <a class="text-muted" href="#">Terms of Service</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-6 text-right">
+                            <p class="mb-0">
+                                &copy; 2019 - <a href="http://icmcng.org" class="text-muted">ICMC</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
             </div>
             </div> 
 @endsection

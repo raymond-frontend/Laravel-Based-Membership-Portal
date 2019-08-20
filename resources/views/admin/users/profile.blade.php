@@ -117,17 +117,30 @@ Welcome
 								</div>
 							
 							<!---------->	
-								<div class="card-body text-center">
-									<h5 class="h6 card-title">Locations</h5>
+								<div style="margin-top:-20px !important"  class="card-body text-center">
+									<h5 class="h6 card-title">Active Locations</h5>
 									<ul class="list-unstyled mb-0">
-										<li class="mb-1"><span data-feather="home" class="feather-sm mr-1"></span> Lives in <a href="#">San Francisco, SA</a></li>
+									<li class="mb-1"><span data-feather="home" class="feather-sm mr-1"></span>{{$user->location}}</li>
 
-										<li class="mb-1"><span data-feather="briefcase" class="feather-sm mr-1"></span> Works at <a href="#">GitHub</a></li>
-										<li class="mb-1"><span data-feather="map-pin" class="feather-sm mr-1"></span> From <a href="#">Boston</a></li>
+									</ul>
+								</div>
+								<div style="margin-top:-20px !important"  class="card-body text-center">
+									<h5 class="h6 card-title">Joined</h5>
+									<ul class="list-unstyled mb-0">
+									<li class="mb-1"><span data-feather="clock" class="feather-sm mr-1"></span>{{$user->created_at->diffForHumans()}}</li>
+
+									</ul>
+								</div>
+
+									<div style="margin-top:-20px !important" class="card-body text-center">
+									<h5 class="h6 card-title">Last Login</h5>
+									<ul class="list-unstyled mb-0">
+									<li class="mb-1"><span data-feather="clock" class="feather-sm mr-1"></span>{{$user->created_at}}</li>
+
 									</ul>
 								</div>
 							
-									<div class="card-body text-center">
+									<div style="margin-top:-20px !important"  class="card-body text-center">
 									<h5 class="h6 card-title">Languages</h5>
 									<a href="javascript:void(0)" class="badge badge-primary mr-1 my-1">{{$user->language}}</a>
 								</div>

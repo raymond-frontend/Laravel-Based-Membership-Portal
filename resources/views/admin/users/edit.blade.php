@@ -147,8 +147,16 @@ Welcome
                         {!! Form::select('membergroup_id', $membergroups, null, ['class' =>'form-control gutterx']) !!}
                     </div>
 
+                 <!---------    <div class="spacing">
+                     <label for="exampleFormControlTextarea1">Role</label>
+                    </div>
 
-                                         <div class="spacing">
+                    <div class="form-group row">
+                        {!! Form::select('role_id', $roles, null, ['class' =>'form-control gutterx']) !!}
+                    </div>---->
+
+
+                        <div class="spacing">
                         <label for="exampleFormControlTextarea1">Academics Qualifications</label>
                      </div>
 

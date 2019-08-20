@@ -55,7 +55,7 @@ class UsersController extends Controller
         $experience = Input::get('experience');
         $style = Input::get('style');
         $membership_id = Input::get('membership_id');
-        $activeLocation = Input::get('active_location');
+        $location = Input::get('location');
         $name = Input::get('name');
 
 
@@ -69,7 +69,7 @@ class UsersController extends Controller
             'experience' => $request->input('experience'),
             'style' => $request->input('style'),
             'membership_id' => $request->input('membership_id'),
-            'activeLocation' => $request ->input('active_location'),
+            'location' => $request ->input('location'),
             'name' => $request -> input('name'),
             'slug' => preg_replace('/\s+/', '-', strtolower($request -> input('name')) )
         ]);

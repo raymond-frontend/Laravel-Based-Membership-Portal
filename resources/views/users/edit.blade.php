@@ -146,7 +146,9 @@ Welcome
                         {!! Form::select('membership_id', $memberships, null, ['class' =>'form-control gutterx']) !!}
                     </div>
 
-                    
+                    <div class="spacing">
+                     <label for="exampleFormControlTextarea1">Languages</label>
+                    </div>
                      <div class="form-group row">
                         {!! Form::text('language', null, ['class' =>'form-control gutterx spacing', 'placeholder' => 'Languages Spoken']) !!}
                     </div>
@@ -181,6 +183,13 @@ Welcome
 
                     <div class="form-group row">
                         {!! Form::textarea('inspiration',  null, ['class' =>'form-control gutterx', 'placeholder'=>'A little about your experience', 'rows' =>'3' ,'maxlength'=>'280']) !!}
+                    </div>
+
+                     <div class="spacing">
+                        <label for="exampleFormControlTextarea1">Active Locations</label>
+                     </div>
+                    <div class="form-group row">
+                        {!! Form::text('location', null, ['class' =>'form-control gutterx spacing', 'placeholder' => 'Active locations, seperated by comma']) !!}
                     </div>
 
                      <div class="spacing">

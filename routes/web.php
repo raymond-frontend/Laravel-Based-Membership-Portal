@@ -38,6 +38,7 @@ Route::patch('users/edit/{id}', 'UsersController@changeAvatar')->name('changeAva
 //Admin User Route
 Route::get('admin/users', 'AdminUsersController@index')->name('adminUsers');
 Route::get('admin/users/verified', 'AdminUsersController@verified')->name('adminVerified');
+Route::get('admin/users/paid', 'AdminUsersController@paid')->name('adminPaid');
 Route::get('admin/users/pending', 'AdminUsersController@pending')->name('adminPending');
 Route::get('admin/users/banned', 'AdminUsersController@banned')->name('adminBanned');
 Route::get('admin/users/profile/{id}', 'AdminUsersController@show')->name('adminUser')->where('id', '\d+');

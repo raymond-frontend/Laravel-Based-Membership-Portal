@@ -10,7 +10,9 @@ use App\Membership;
 use App\Membergroup;
 use Mail;
 use App\Post;
+use App\Role;
 use App\Mail\duesNotification;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 
 
@@ -18,12 +20,13 @@ class AdminUsersController extends Controller
 {
     public function index(){
         $users = User::all();
-        $latestUsers = User::latest()->orderBy('created_at', 'DESC')->paginate(30);
+        $latestUsers = User::latest()->orderBy('created_at', 'DESC')->paginate(100);
         $pendingUsers = $users->where('membergroup_id', '=', '1');
         $verifiedUsers= $users->where('membergroup_id', '=', '3');
+        $paid = $users->where('paid_id', '=', '2');
         if(Auth::check()){
             if(Auth::User()->isAdmin()){
-             return view('admin.users.index', compact('users', 'latestUsers', 'pendingUsers', 'verifiedUsers'));
+             return view('admin.users.index', compact('users', 'latestUsers', 'pendingUsers', 'verifiedUsers', 'paid'));
         }elseif (Auth::User() == null) {
             return redirect()->route('welcome');
         }else{
@@ -36,7 +39,7 @@ class AdminUsersController extends Controller
 
     public function verified(){
         $users = User::all();
-        $verifiedMembers = $users->where('membergroup_id', '=' , '3');
+        $verifiedMembers = User::where('membergroup_id', '=' , '3')->paginate(100);
         if(Auth::check()){
             if(Auth::User()->isAdmin()){
             return view('admin.users.verified', compact('verifiedMembers'));
@@ -47,9 +50,22 @@ class AdminUsersController extends Controller
         
     }
 
+    public function paid(){
+        $users = User::all();
+        $paidMembers = User::where('paid_id', '=', '2')->paginate(100);
+        if(Auth::check()){
+            if(Auth::User()->isAdmin()){
+                return view('admin.users.paid', compact('paidMembers'));
+            }else{
+                 return redirect()->back()->withErrors(['message', 'You are not authorized to check this page']);
+            }
+
+        }
+    }
+
     public function pending(){
         $users = User::all();
-        $pendingUsers = $users->where('membergroup_id', '=', '1');
+        $pendingUsers = User::where('membergroup_id', '=', '1')->paginate(100);
         if(Auth::check()){
             if(Auth::user()->isAdmin()){
                 return view('admin.users.pending',  compact('pendingUsers' ,  'users'));
@@ -62,10 +78,10 @@ class AdminUsersController extends Controller
 
         public function banned(){
         $users = User::all();
-        $bannedUsers = $users->where('membergroup_id', '=', '2');
+        $bannedUsers = User::where('membergroup_id', '=', '2')->paginate(100);
         if(Auth::check()){
             if(Auth::user()->isAdmin()){
-                return view('admin.users.pending', compact('bannedUsers'));
+                return view('admin.users.banned', compact('bannedUsers'));
             }
 
         }
@@ -90,9 +106,10 @@ class AdminUsersController extends Controller
         $user = User::findOrFail($id);
         $memberships = Membership::pluck('name', 'id')->all();
         $membergroups = Membergroup::pluck('name', 'id')->all();
+        $roles = Role::pluck('name', 'id')->all();
         if(Auth::check()){
             if(Auth::User()->isAdmin()){
-            return view('admin.users.edit', compact('user', 'memberships', 'membergroups'));
+            return view('admin.users.edit', compact('user', 'memberships', 'membergroups', 'roles'));
         }else{
              return redirect()->back();
              }
@@ -114,6 +131,7 @@ class AdminUsersController extends Controller
         $membership_id = Input::get('membership_id');
         $membergroup_id = Input::get('membergroup_id');
         $activeLocation = Input::get('active_location');
+        $role = Input::get('role_id');
 
 
        $user = User::findOrFail($id);
@@ -127,7 +145,8 @@ class AdminUsersController extends Controller
             'style' => $request->input('style'),
             'membership_id' => $request->input('membership_id'),
             'membergroup_id' => $request->input('membergroup_id'),
-            'activeLocation' => $request ->input('active_location')
+            'activeLocation' => $request ->input('active_location'),
+            'role_id' => $request->input('role_id')
         ]);
 
         if(Auth::check()){
@@ -135,10 +154,10 @@ class AdminUsersController extends Controller
                 switch ($user->membergroup_id) {
                     case '4':
                         Mail::to($user)->send(new duesNotification());
-                        return redirect()->route('adminUsers');
+                        return redirect()->route('adminUsers')->with(['message' =>'User updated successfully']);
                         break;                  
                     default:
-                        return redirect()->route('adminUsers');
+                        return redirect()->route('adminUsers')->with(['message' =>'User updated successfully']);;
                         break;
                 }
                

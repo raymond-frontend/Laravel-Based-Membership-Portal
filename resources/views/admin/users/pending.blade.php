@@ -21,6 +21,7 @@ Welcome
                         <ul id="dashboards" class="sidebar-dropdown list-unstyled collapse show">
 						<li class="sidebar-item active"><a href="{{route('adminUsers')}}" class="sidebar-link" >Home</a></li>
 						<li class="sidebar-item"><a class="sidebar-link" href="{{route('adminVerified')}}">Verified Members</a></li>
+						<li class="sidebar-item"><a class="sidebar-link" href="{{route('adminPaid')}}">Paid Dues</a></li>
 						<li class="sidebar-item"><a class="sidebar-link" href="{{route('adminPending')}}">Pending Users</a></li>
 						<li class="sidebar-item"><a class="sidebar-link" href="{{route('adminBanned')}}">Banned Users</a></li>
 						<li class="sidebar-item"><a class="sidebar-link" href="{{route('makeAnnouncement')}}">Create Announcement</a></li>
@@ -115,17 +116,7 @@ Welcome
 							<div class="card flex-fill">
 								<div class="card-header">
 									<div class="card-actions float-right">
-										<div class="dropdown show">
-											<a href="#" data-toggle="dropdown" data-display="static">
-												<i class="align-middle" data-feather="more-horizontal"></i>
-											</a>
-
-											<div class="dropdown-menu dropdown-menu-right">
-												<a class="dropdown-item" href="#">Pending</a>
-												<a class="dropdown-item" href="#">Banned</a>
-											<a class="dropdown-item" href="{{route('adminVerified')}}">Verified</a>
-											</div>
-										</div>
+										
 									</div>
 									<h5 class="card-title mb-0">Latest Users</h5>
 								</div>
@@ -137,7 +128,7 @@ Welcome
 											<th class="d-none d-xl-table-cell">Registered</th>
                                             <th>Status</th>
                                             <th>Cadre</th>
-                                            <th>Paid</th>
+                                            <th></th>
 											<th class="d-none d-md-table-cell">Action</th>
 										</tr>
 									</thead>
@@ -166,7 +157,11 @@ Welcome
 											@endswitch
 										
                                             <td class="d-none d-md-table-cell">{{$fresh->membership->name}}</td>
-                                            <td></td>
+                                            @if ($fresh->paid_id == 2)
+													<td class="d-none d-md-table-cell"><span class="badge badge-success">{{$fresh->paid->name}}</span></td>
+												@else
+													<td></td>
+												@endif
                                             <td class="d-none d-md-table-cell">
                                                 	<div class="card-actions float-left">
 										<div class="dropdown show">
@@ -193,75 +188,11 @@ Welcome
 					
 					</div>
                     
-               <!-----    	<div class="row">
-						<div class="col-12 col-lg-6 col-xl-4 d-flex">
-							<div class="card flex-fill">
-								<div class="card-header">
-									<div class="card-actions float-right">
-										<div class="dropdown show">
-											<a href="#" data-toggle="dropdown" data-display="static">
-												<i class="align-middle" data-feather="more-horizontal"></i>
-											</a>
-
-											<div class="dropdown-menu dropdown-menu-right">
-												<a class="dropdown-item" href="#">Action</a>
-												<a class="dropdown-item" href="#">Another action</a>
-												<a class="dropdown-item" href="#">Something else here</a>
-											</div>
-										</div>
-									</div>
-									<h5 class="card-title mb-0">Announcements</h5>
-								</div>
-								<div class="card-body d-flex">
-									<div class="align-self-center w-100">
-										<div class="chart">
-											<div id="datetimepicker-dashboard"></div>
-										</div>
-									</div>
-								</div>
-							</div>
+         		 <div class="row">
+						<div class="col-12 col-lg-6 col-xl-12 d-flex">
+							{{$pendingUsers->links()}}
 						</div>
-						<div class="col-12 col-xl-4 d-none d-xl-flex">
-							<div class="card flex-fill w-100">
-								<div class="card-header">
-									<div class="card-actions float-right">
-										<div class="dropdown show">
-											<a href="#" data-toggle="dropdown" data-display="static">
-												<i class="align-middle" data-feather="more-horizontal"></i>
-											</a>
-
-											<div class="dropdown-menu dropdown-menu-right">
-												<a class="dropdown-item" href="#">Action</a>
-												<a class="dropdown-item" href="#">Another action</a>
-												<a class="dropdown-item" href="#">Something else here</a>
-											</div>
-										</div>
-									</div>
-									<h5 class="card-title mb-0">Latest Members</h5>
-								</div>
-								<div class="card-body">
-									<div class="align-self-center w-100">
-									
-
-										<table class="table mb-0" >
-											<thead>
-												<tr>
-													<th>Name</th>
-													<th class="text-right">status</th>
-													
-												</tr>
-											</thead>
-											<tbody style="border-top:none !important;">
-											
-											</tbody>
-										</table>
-									</div>
-								</div>
-							
-							</div>
-						</div>
-		
-                    </div>--> 
+					</div>
                     
            
 

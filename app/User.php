@@ -21,7 +21,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'name', 'email', 'password', 'reference_id', 'language', 'bio', 'academics',
          'professional', 'experience', 'style','inspiration', 'membership_id','role_id',
-         'membergroup_id', 'slug', 'last_login_at', 'last_login_ip', 'location'
+         'membergroup_id', 'slug', 'last_login_at', 'last_login_ip', 'location', 'paid_id'
     ];
 
     /**
@@ -57,6 +57,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function role(){
         return $this->belongsTo('App\Role');
+    }
+
+    public function paid(){
+        return $this->belongsTo('App\paid');
     }
 
     public function membergroup(){
