@@ -68,12 +68,8 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function isAdmin(){
-        if($this->role['name'] == 'Administrator'){
-            return true;
-
-        }else{
-            return false;
-        }
+       return $this->role['name'] == 'Administrator';
+     
     }
 
  

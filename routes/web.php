@@ -29,32 +29,32 @@ Route::get('home', 'HomeController@index')->name('home')->middleware('verified')
 Route::post('csv/import', 'CsvFile@csv_import')->name('import');***/
 
 //Users Route
-Route::get('users', 'UsersController@index')->name('users');
-Route::get('users/profile/{slug}', 'UsersController@show')->name('user');
-Route::get('users/edit/{id}', 'UsersController@edit')->name('editUser')->where('id', '\d+');
-Route::put('users/edit/{id}', 'UsersController@update')->name('update')->where('id', '\d+');
-Route::patch('users/edit/{id}', 'UsersController@changeAvatar')->name('changeAvatar')->where('id', '\d+');
+Route::get('users', 'UsersController@index')->name('users')->middleware('auth');
+Route::get('users/profile/{slug}', 'UsersController@show')->name('user')->middleware('auth');
+Route::get('users/edit/{id}', 'UsersController@edit')->name('editUser')->where('id', '\d+')->middleware('auth');
+Route::put('users/edit/{id}', 'UsersController@update')->name('update')->where('id', '\d+')->middleware('auth');
+Route::patch('users/edit/{id}', 'UsersController@changeAvatar')->name('changeAvatar')->where('id', '\d+')->middleware('auth');
 
 //Admin User Route
-Route::get('admin/users', 'AdminUsersController@index')->name('adminUsers');
-Route::get('admin/users/verified', 'AdminUsersController@verified')->name('adminVerified');
-Route::get('admin/users/paid', 'AdminUsersController@paid')->name('adminPaid');
-Route::get('admin/users/pending', 'AdminUsersController@pending')->name('adminPending');
-Route::get('admin/users/banned', 'AdminUsersController@banned')->name('adminBanned');
-Route::get('admin/users/profile/{id}', 'AdminUsersController@show')->name('adminUser')->where('id', '\d+');
-Route::get('admin/users/edit/{id}', 'AdminUsersController@edit')->name('adminEditUser')->where('id', '\d+');
-Route::put('admin/users/edit/{id}', 'AdminUsersController@update')->name('adminUpdateUser')->where('id', '\d+');
-Route::get('admin/{id}', ['uses'=>'AdminUsersController@destroy', 'as' => 'deleteUser', 'middleware' => 'auth']);
+Route::get('admin/users', 'AdminUsersController@index')->name('adminUsers')->middleware('auth');
+Route::get('admin/users/verified', 'AdminUsersController@verified')->name('adminVerified')->middleware('auth');
+Route::get('admin/users/paid', 'AdminUsersController@paid')->name('adminPaid')->middleware('auth');
+Route::get('admin/users/pending', 'AdminUsersController@pending')->name('adminPending')->middleware('auth');
+Route::get('admin/users/banned', 'AdminUsersController@banned')->name('adminBanned')->middleware('auth');
+Route::get('admin/users/profile/{id}', 'AdminUsersController@show')->name('adminUser')->where('id', '\d+')->middleware('auth');
+Route::get('admin/users/edit/{id}', 'AdminUsersController@edit')->name('adminEditUser')->where('id', '\d+')->middleware('auth');
+Route::put('admin/users/edit/{id}', 'AdminUsersController@update')->name('adminUpdateUser')->where('id', '\d+')->middleware('auth');
+Route::get('admin/{id}', ['uses'=>'AdminUsersController@destroy', 'as' => 'deleteUser', 'middleware' => 'auth'])->middleware('auth');
 
 //Posts Route
-Route::get('admin_user/announcements', 'PostController@index')->name('adminPosts');
-Route::get('admin_user/post/{id}', 'PostController@show')->name('post')->where('id', '\d+');
-Route::get('admin_user/create_announcement', 'PostController@createAnnouncement')->name('makeAnnouncement');
-Route::any('admin_user/posts/announcement', 'PostController@create')->name('adminPost');
-Route::get('post/{id}', 'PostController@show')->name('post')->where('id', '\d+');
-Route::get('admin_user/post/edit/{id}', 'PostController@edit')->name('editPost')->where('id', '\d+');
-Route::put('admin_user/post/update/{id}', 'PostController@update')->name('updatePost')->where('id', '\d+');
-Route::get('admin_user/post/delete/{id}', 'PostController@destroy')->name('deletePost')->where('id', '\d+');
+Route::get('admin_user/announcements', 'PostController@index')->name('adminPosts')->middleware('auth');
+Route::get('admin_user/post/{id}', 'PostController@show')->name('post')->where('id', '\d+')->middleware('auth');
+Route::get('admin_user/create_announcement', 'PostController@createAnnouncement')->name('makeAnnouncement')->middleware('auth');
+Route::any('admin_user/posts/announcement', 'PostController@create')->name('adminPost')->middleware('auth');
+Route::get('post/{id}', 'PostController@show')->name('post')->where('id', '\d+')->middleware('auth');
+Route::get('admin_user/post/edit/{id}', 'PostController@edit')->name('editPost')->where('id', '\d+')->middleware('auth');
+Route::put('admin_user/post/update/{id}', 'PostController@update')->name('updatePost')->where('id', '\d+')->middleware('auth');
+Route::get('admin_user/post/delete/{id}', 'PostController@destroy')->name('deletePost')->where('id', '\d+')->middleware('auth');
 
 //search
 Route::any('/search', function(){
