@@ -60,6 +60,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'member_id' => ['required', 'lte:7124'],
         ]);
     }
 
@@ -77,7 +78,8 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'reference_id' => unique_random('users', 'reference_id', 1000000, 1),
-            'slug' => preg_replace('/\s+/', '-', $str)
+            'slug' => preg_replace('/\s+/', '-', $str),
+            'member_id' => $data['member_id'],
         ]);
         
 

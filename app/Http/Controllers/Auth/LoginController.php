@@ -65,7 +65,7 @@ class LoginController extends Controller
     }
 
  public function username(){
-     return 'reference_id';
+     return 'member_id';
  }
 
 
