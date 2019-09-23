@@ -35,7 +35,7 @@ Welcome
                         <div class="media-body">
                         <h5 class="mb-1">{{Auth::user()->name}}</h5>
                             <div>
-                                <i class="fas fa-circle text-success"></i>&nbsp; Member {{Auth::user()->reference_id}}
+                                <i class="fas fa-circle text-success"></i>&nbsp; Member {{Auth::user()->member_id}}
                             </div>
                         </div>
                     </div>
@@ -77,7 +77,7 @@ Welcome
                                             <a style="color:green" class="dropdown-item" href="Javascript:void()"><i class="align-middle mr-1"
                                         data-feather="pie-chart"></i> Online</a>
                                         <a style="color:red" class="dropdown-item" href="Javascript:void()"><i class="align-middle mr-1"
-										data-feather="pie-bar"></i> Membership ID: {{Auth::User()->reference_id}}</a>
+										data-feather="pie-bar"></i> Membership ID: {{Auth::User()->member_id}}</a>
                                             <a class="dropdown-item" href="users/profile/{{Auth::User()->slug}}"><i class="align-middle mr-1"
 										data-feather="user"></i> Profile</a>
                                               

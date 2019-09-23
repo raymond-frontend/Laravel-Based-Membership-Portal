@@ -19,7 +19,14 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class AdminUsersController extends Controller
 {
-    public function index(){
+
+    public function __construct(){
+
+        $this->middleware('auth');
+    }
+
+    public function index()
+    {
         $users = User::all();
         $latestUsers = User::latest()->orderBy('created_at', 'DESC')->paginate(100);
         $pendingUsers = $users->where('membergroup_id', '=', '1');
@@ -38,7 +45,8 @@ class AdminUsersController extends Controller
         
     }
 
-    public function verified(){
+    public function verified()
+    {
         $users = User::all();
         $verifiedMembers = User::where('membergroup_id', '=' , '3')->paginate(100);
         if(Auth::check()){
@@ -51,7 +59,8 @@ class AdminUsersController extends Controller
         
     }
 
-    public function paid(){
+    public function paid()
+    {
         $users = User::all();
         $paidMembers = User::where('paid_id', '=', '2')->paginate(100);
         if(Auth::check()){
@@ -64,7 +73,8 @@ class AdminUsersController extends Controller
         }
     }
 
-    public function pending(){
+    public function pending()
+    {
         $users = User::all();
         $pendingUsers = User::where('membergroup_id', '=', '1')->paginate(100);
         if(Auth::check()){
@@ -77,7 +87,8 @@ class AdminUsersController extends Controller
         }
     }
 
-        public function banned(){
+        public function banned()
+        {
         $users = User::all();
         $bannedUsers = User::where('membergroup_id', '=', '2')->paginate(100);
         if(Auth::check()){
@@ -88,7 +99,8 @@ class AdminUsersController extends Controller
         }
     }
 
-    public function show($id){
+    public function show($id)
+    {
         $user = User::findOrFail($id);
         if(Auth::check()){
             if(Auth::User()->isAdmin()){
@@ -103,7 +115,8 @@ class AdminUsersController extends Controller
     }
 
 
-    public function edit($id){
+    public function edit($id)
+    {
         $user = User::findOrFail($id);
         $memberships = Membership::pluck('name', 'id')->all();
         $membergroups = Membergroup::pluck('name', 'id')->all();
@@ -121,7 +134,8 @@ class AdminUsersController extends Controller
     }
 
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
 
         $inspiration = Input::get('inspiration');
         $language = Input::get('language');
@@ -174,7 +188,8 @@ class AdminUsersController extends Controller
 
    
 
-        public function destroy($id){
+        public function destroy($id)
+        {
         $user = User::findOrFail($id);
         if(Auth::User()->isAdmin()){
             if(Auth::User() !==  $user){

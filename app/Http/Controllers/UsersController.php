@@ -11,28 +11,33 @@ use Image;
 
 class UsersController extends Controller
 {
-    public function __construct(){
+
+    public function __construct()
+    {
         $this->middleware('auth');
 
     }
 
 
-    public function index(){
+    public function index()
+    {
        
         $users = User::all()->where('membergroup_id', '=' , '3');
         //$user = User::latest()->orderBy('id')->get()->paginate(7);
         return view('users.index', compact('users'));
     }
 
-    public function show($slug){
+
+    public function show($slug)
+    {
         $user = User::where('slug', $slug)->first();
         return view('users.profile', compact('user'));
     
-       
-
     }
 
-    public function edit( $id){
+
+    public function edit( $id)
+    {
         $user = User::findOrFail($id);
         $memberships = Membership::pluck('name', 'id')->all();
         if(Auth::user()->id !== $user->id){
@@ -44,9 +49,8 @@ class UsersController extends Controller
 
     }
 
-    public function update(Request $request, $id){
-    
-
+    public function update(Request $request, $id)
+    {
         $inspiration = Input::get('inspiration');
         $language = Input::get('language');
         $bio = Input::get('bio');
@@ -86,9 +90,10 @@ class UsersController extends Controller
 
     }
 
-     public function changeAvatar(Request $request, $id){
+     public function changeAvatar(Request $request, $id)
+     {
          $this->validate($request, [
-             'avatar' => 'image|required|mimes:jpeg,png,jpg,gif,svg'
+             'avatar' => 'image|required|mimes:jpeg,png,jpg,gif,svg|dimensions:max_width=600, max_height=600'
          ]);
          if($request->hasFile('avatar')){
              $avatar = $request->file('avatar');

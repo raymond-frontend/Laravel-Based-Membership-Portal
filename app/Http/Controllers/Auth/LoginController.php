@@ -37,6 +37,7 @@ class LoginController extends Controller
                 Auth::logout();
                  return redirect('/login')->withErrors(['msg' => 'Please pay up your dues. Contact the secretariat on info@icmc.org']);
                 break;
+
             case ($user->isAdmin()):
                 $user-> update([
                 'last_login_at' =>Carbon::now()->toDateTimeString(),
@@ -44,6 +45,7 @@ class LoginController extends Controller
                 ]);
                 return redirect()->route('adminUsers');
                 break;
+
             case ($user->membergroup->name == 'Banned');
                 $user-> update([
                 'last_login_at' =>Carbon::now()->toDateTimeString(),
@@ -51,6 +53,7 @@ class LoginController extends Controller
                 ]);
                 Auth::logout();
                 return redirect('/login')->withErrors(['msg'=>'You have been banned. Contact the secretariat on info@icmc.org']);   
+                
             default:
                 $user-> update([
                 'last_login_at' =>Carbon::now()->toDateTimeString(),

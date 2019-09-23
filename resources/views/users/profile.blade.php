@@ -67,7 +67,7 @@ Welcome
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right">
 											<a style="color:green" class="dropdown-item" href="#"> Online</a>
-										<a style="color:red" class="dropdown-item" href="#">Membership ID: {{Auth::User()->reference_id}}</a>
+										<a style="color:red" class="dropdown-item" href="#">Membership ID: {{Auth::User()->member_id}}</a>
                                             <a class="dropdown-item" href="/home"></i>Home</a>
                                               
                                            <!------ <div class="dropdown-divider"></div>
@@ -93,19 +93,17 @@ Welcome
 					<div class="row">
 						<div class="col-md-2 mb-3"></div>
                         <div class="col-md-8 mb-3 scard-2" style="postion:absolute;">
-							<div style="position:relative; overflow:hidden">
-								<img src="/assets/img/background/bgg.jpg" alt="" width="" height="" >
-						<img src="/uploads/avatars/{{$user->avatar}}" alt="{{$user->name}}" style="box-shadow:0 4px 5px rgba(57, 63, 72, 0.5)" class=" profile-gutter img-fluid rounded-circle mb-2" width="152" height="152" style="z-index:999;" />	
+							<div style="background-image:url('/assets/img/background/profile-bg.jpg'); position:relative; overflow:hidden; background-repeat:no-repeat; max-width:100%;">
+							<div style="padding-top:50px; padding-left:10px;"><img src="/uploads/avatars/{{$user->avatar}}" alt="{{$user->name}}" style="box-shadow:0 4px 5px rgba(57, 63, 72, 0.5)" class=" img-fluid rounded-circle mb-2" width="152" height="152" style="z-index:999;" /></div>
 							</div>
-						
-						
-							<div>
-							<p class="profile-gutterx profile-name">{{$user->name}}
+
+							<div style="margin-top:20px;">
+							<p style="font-weight:600;" class=" profile-id">{{$user->name}}
 								@if ($user->membergroup_id == '3')
 								<img src="/assets/img/avatars/verified.png" alt="">
 								@endif  </p>	
-							<p class="profile-id">Membership ID. <span style="font-weight:800;">{{$user->reference_id}}</span> </p>
-							<a class="btn btn-primary btn-sm profile-cadre" href="javascrip:void(0)">{{$user->membership->name}}</a>
+							<p class="profile-id"> Membership ID. <span style="font-weight:800;">{{$user->member_id}}</span> </p>
+							<div><a class="btn btn-primary btn-sm profile-cadre" href="javascrip:void(0)">{{$user->membership->name}}</a> <span class="float-right"><a class="btn btn-danger btn-sm profile-cadre" href="{{route('editUser', $user->id)}}">Update</a></span> </div>	
 							</div>
 						</div> 
 						<div class="col-md-2 mb-3"></div>  
