@@ -67,7 +67,7 @@ Welcome
                                             <a style="color:green" class="dropdown-item" href="#"><i class="align-middle mr-1"
                                         data-feather="pie-chart"></i> Online</a>
                                         <a style="color:red" class="dropdown-item" href="#"><i class="align-middle mr-1"
-										data-feather="bar-chart"></i>{{Auth::User()->reference_id}}</a>
+										data-feather="bar-chart"></i>{{Auth::User()->member_id}}</a>
                                             <a class="dropdown-item" href="users/profile/{{$user->id}}"><i class="align-middle mr-1"
 										data-feather="user"></i> Profile</a>
                                               

@@ -39,7 +39,7 @@ Welcome
                         <div class="media-body">
                         <h5 class="mb-1">{{Auth::user()->name}}</h5>
                             <div>
-                                <i class="fas fa-circle text-success"></i>&nbsp; Member {{Auth::user()->reference_id}}
+                                <i class="fas fa-circle text-success"></i>&nbsp; Member {{Auth::user()->member_id}}
                             </div>
                         </div>
                     </div>
@@ -134,7 +134,7 @@ Welcome
                                         @foreach ($paidMembers as $fresh)
                                             <tr>
 											<td><a style="text-decoration:none;" href="{{route('adminUser', $fresh->id)}}">{{$fresh->name}}</a></td>
-											<td class="d-none d-xl-table-cell">{{$fresh->reference_id}}</td>
+											<td class="d-none d-xl-table-cell">{{$fresh->member_id}}</td>
 											<td class="d-none d-xl-table-cell">{{$fresh->created_at->diffForHumans()}}</td>
 
 											@switch($fresh->membergroup_id)

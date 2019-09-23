@@ -43,7 +43,7 @@ class welcomeNotification extends Notification
         return (new MailMessage)
                     ->success()
                     ->subject('welcome')
-                    ->line('Dear ' . $this->user->name . ' , Welcome to ICMC membership portal. Kindly note that your Membership ID is **' . $this->user->reference_id .'**. Login into the portal with your ID alongside your password')
+                    ->line('Dear ' . $this->user->name . ' , Welcome to ICMC membership portal. Kindly note that your Membership ID is **' . $this->user->member_id .'**. Login into the portal with your ID alongside your password')
                     ->line('Thank you for using our application!');
     }
 

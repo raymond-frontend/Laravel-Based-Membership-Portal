@@ -54,7 +54,7 @@ Welcome
                         <div class="media-body">
                         <h5 class="mb-1">{{Auth::user()->name}}</h5>
                             <div>
-                                <i class="fas fa-circle text-success"></i>&nbsp; Member {{Auth::user()->reference_id}}
+                                <i class="fas fa-circle text-success"></i>&nbsp; Member {{Auth::user()->member_id}}
                             </div>
                         </div>
                     </div>

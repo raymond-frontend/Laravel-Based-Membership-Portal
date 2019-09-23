@@ -1,116 +1,27 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <title>Laravel</title>
+@section('content')
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-        <!-- Styles -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-
-            .gutter{
-                margin-top: 0px;
-            }
-            .prof{
-                font-size: 3.4rem;
-                line-height: 1.125;
-                font-weight: 500;
-                color: rgba(0,0,0,0.8);
-                color: #337c27;
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-1 mb-3"></div>
+            <div class="col-md-4 mb-3" style="margin-top:20px;">
+                <h1
+                style="color:#019935; font-family:system-ui !important; font-size:62px; line-height: 80px; vertical-align: baseline; letter-spacing:normal; word-spacing:0px;
+                  font-weight:200; font-style:normal; font-variant: normal; text-transform:none; text-decoration:none solid rgb(41, 119, 201); text-align:start;text-indent:0px;"
                 
-            }
+                >Welcome to our professional community</h1>
 
-            
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <section class="gutter">
-                <div class="container">
-                    <div class="row">
-                        <div style="margin-top:100px;" class="col-md-5 mb-3">
-                       <p class="prof">Welcome to your professional community</p>     
-                        </div>
-                        <div style="margin-top:200px;" class="col-md-7 mb-3">
-                            <img src="/assets/img/background/icmcx.png" alt="">
-                            
-                        </div>
-                       
-                    </div>
-                </div>
-            </section>
-
-            
-            
+            </div>
+            <div class="col-md-7 mb-3" style="margin-top:80px;">
+              <img style="max-width:100%" src="/assets/img/background/new-icmc-01.svg" alt="">  
+            </div>
         </div>
-    </body>
-</html>
+    </div>
+</section>
+
+
+
+
+@endsection

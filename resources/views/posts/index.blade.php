@@ -35,7 +35,7 @@ Welcome
                         <div class="media-body">
                         <h5 class="mb-1">{{Auth::user()->name}}</h5>
                             <div>
-                                <i class="fas fa-circle text-success"></i>&nbsp; Member {{Auth::user()->reference_id}}
+                                <i class="fas fa-circle text-success"></i>&nbsp; Member {{Auth::user()->member_id}}
                             </div>
                         </div>
                     </div>
@@ -77,7 +77,7 @@ Welcome
                                             <a style="color:green" class="dropdown-item" href="Javascript:void()"><i class="align-middle mr-1"
                                         data-feather="pie-chart"></i> Online</a>
                                         <a style="color:red" class="dropdown-item" href="Javascript:void()"><i class="align-middle mr-1"
-										data-feather="pie-bar"></i> Membership ID: {{Auth::User()->reference_id}}</a>
+										data-feather="pie-bar"></i> Membership ID: {{Auth::User()->member_id}}</a>
                                             <a class="dropdown-item" href="users/profile/{{$user->slug}}"><i class="align-middle mr-1"
 										data-feather="user"></i> Profile</a>
                                               
@@ -121,7 +121,7 @@ Welcome
 									<h5 class="card-title mb-0">Welcome</h5>
 								</div>
 								<div class="card-body d-flex">
-							<p style="font-size:14px; line-height:1.4">Hello {{$user->name}}, welcome to ICMC membership portal. Your Membership ID is <span style="color:red;">{{$user->reference_id}}.</span> <br>
+							<p style="font-size:14px; line-height:1.4">Hello {{$user->name}}, welcome to ICMC membership portal. Your Membership ID is <span style="color:red;">{{$user->member_id}}.</span> <br>
 							To access the portal, your username is your membership ID and your password is your chosen password during registration. <br>
 							Proceed to update your profile, while the admin verifies your authencity as a member. <br>
 							A welcome mail containing your Membership ID has been sent to you, should in case you forgot your ID. <br>
