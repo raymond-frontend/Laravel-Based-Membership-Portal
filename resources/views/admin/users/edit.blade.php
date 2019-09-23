@@ -88,7 +88,7 @@ Welcome
 
                     <div class="row">
                         <div class="col-md-8 mb-3 Subhead">
-                            <h2 class="Subhead-heading gutter">Profile Update </h2>
+                            <h2 class="Subhead-heading gutter">Update Member </h2>
                         </div>
 
                         <div class="col-md-4 mb-3">
@@ -108,23 +108,6 @@ Welcome
                     <div class="row">
                         <div class="col-md-8 mb-3 gutter">
                       {!! Form::model($user, ['method' => 'PUT', 'action' =>['AdminUsersController@update', $user->id]])!!}
-
-
-                       <div class="spacing">
-                        <label for="exampleFormControlTextarea1">Name</label>
-                     </div>
-
-                        <div class="form-group row">
-                        {!! Form::text('name', null, ['class' =>'form-control gutterx']) !!}
-                    </div>
-
-                     <div class="spacing">
-                        <label for="exampleFormControlTextarea1">Bio</label>
-                     </div>
-
-                    <div class="form-group row">
-                        {!! Form::textarea('bio',  null, ['class' =>'form-control gutterx', 'placeholder'=>'Brag a Little about yourself', 'rows' =>'3', 'maxlength'=>'180']) !!}
-                    </div>
                     
 
                      <div class="spacing">
@@ -135,10 +118,7 @@ Welcome
                         {!! Form::select('membership_id', $memberships, null, ['class' =>'form-control gutterx']) !!}
                     </div>
 
-                      <div class="form-group row">
-                        {!! Form::text('language', null, ['class' =>'form-control gutterx spacing', 'placeholder' => 'Languages Spoken']) !!}
-                    </div>
-
+                    
                     <div class="spacing">
                      <label for="exampleFormControlTextarea1">Membergroup</label>
                     </div>
@@ -156,46 +136,7 @@ Welcome
                     </div>---->
 
 
-                        <div class="spacing">
-                        <label for="exampleFormControlTextarea1">Academics Qualifications</label>
-                     </div>
-
-                    <div class="form-group row">
-                        {!! Form::textarea('academics',  null, ['class' =>'form-control gutterx', 'placeholder'=>'Brag a Little about yourself', 'rows' =>'3', 'maxlength'=>'180']) !!}
-                    </div>
-
-                         <div class="spacing">
-                        <label for="exampleFormControlTextarea1">Professional Qualifications</label>
-                     </div>
-
-                    <div class="form-group row">
-                        {!! Form::textarea('professional',  null, ['class' =>'form-control gutterx', 'placeholder'=>'What are your Qualifications', 'rows' =>'3', 'maxlength'=>'180']) !!}
-                    </div>
-
-                        <div class="spacing">
-                        <label for="exampleFormControlTextarea1">Professional Experience</label>
-                     </div>
-
-                    <div class="form-group row">
-                        {!! Form::textarea('experience',  null, ['class' =>'form-control gutterx', 'placeholder'=>'A little about your experience', 'rows' =>'3' ,'maxlength'=>'180']) !!}
-                    </div>
-
-                       <div class="spacing">
-                        <label for="exampleFormControlTextarea1">Inspiration</label>
-                     </div>
-
-                    <div class="form-group row">
-                        {!! Form::textarea('inspiration',  null, ['class' =>'form-control gutterx', 'placeholder'=>'A little about your experience', 'rows' =>'3' ,'maxlength'=>'180']) !!}
-                    </div>
-
-                     <div class="spacing">
-                        <label for="exampleFormControlTextarea1">Mediation Style</label>
-                     </div>
-
-                    <div class="form-group row">
-                        {!! Form::textarea('style',  null, ['class' =>'form-control gutterx', 'placeholder'=>'What is your style', 'rows' =>'3' ,'maxlength'=>'180']) !!}
-                    </div>
-
+                      
                      <div class="spacing">
                       
                      </div>
@@ -216,25 +157,7 @@ Welcome
 
             </main>
 
-            <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row text-muted">
-                        <div class="col-6 text-left">
-                            <ul class="list-inline">
-
-                                <li class="list-inline-item">
-                                    <a class="text-muted" href="#">Terms of Service</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-6 text-right">
-                            <p class="mb-0">
-                                &copy; 2019 - <a href="http://icmcng.org" class="text-muted">ICMC</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+  
             </div>
             </div> 
 @endsection

@@ -118,7 +118,7 @@ Welcome
 									<div class="card-actions float-right">
 										
 									</div>
-									<h5 class="card-title mb-0 text-center">Welcome &nbsp;<span style="color:#000; font-weight:700">{{$user->name}}</span></h5>
+									<h5 class="card-title mb-0 text-left">Welcome &nbsp;<span style="color:#000; font-weight:700">{{$user->name}}</span></h5>
 								</div>
 							</div>
 						</div>
@@ -161,11 +161,17 @@ Welcome
 								</div>
 								<div class="card-body">
 									<div class="align-self-center w-100">
-										@foreach ($latestUsers as $fresh)
-										<p style="line-height:1.5; color:#000; font-size:15px; !important;">
+                                    
+                                                @foreach ($latestUsers as $fresh)
+                                                @if ($fresh->role_id == 1)
+                                                    <img class="rounded-circle mr-3" src="/uploads/avatars/{{$fresh->avatar}}" alt="{{$fresh->name}}" width="40" height="40">	<p style="line-height:1.5; color:#000; font-size:15px; !important;">
 											{{$fresh->name}}
-										</p>		
-										@endforeach								
+										</p>
+                                                @endif
+											
+										@endforeach	
+                                     
+																
 														
 
 									</div>

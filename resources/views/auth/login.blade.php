@@ -23,7 +23,7 @@
                             <label for="reference_id" class="col-md-4 col-form-label text-md-right">{{ __('Membership ID') }}</label>
 
                             <div class="col-md-6">
-                                <input id="reference_id" type="text" class="form-control @error('reference_id') is-invalid @enderror" name="reference_id" value="{{ old('reference_id') }}" required autocomplete="refernce_id" autofocus>
+                                <input id="member_id" type="text" class="form-control @error('member_id') is-invalid @enderror" name="member_id" value="{{ old('member_id') }}" required autocomplete="member_id" autofocus>
 
                                 @error('refernce_id')
                                     <span class="invalid-feedback" role="alert">

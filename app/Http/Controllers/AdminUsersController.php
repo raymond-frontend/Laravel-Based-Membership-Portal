@@ -11,6 +11,7 @@ use App\Membergroup;
 use Mail;
 use App\Post;
 use App\Role;
+use App\Paid;
 use App\Mail\duesNotification;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -106,10 +107,11 @@ class AdminUsersController extends Controller
         $user = User::findOrFail($id);
         $memberships = Membership::pluck('name', 'id')->all();
         $membergroups = Membergroup::pluck('name', 'id')->all();
+        $paids = Paid::pluck('name', 'id')->all();
         $roles = Role::pluck('name', 'id')->all();
         if(Auth::check()){
             if(Auth::User()->isAdmin()){
-            return view('admin.users.edit', compact('user', 'memberships', 'membergroups', 'roles'));
+            return view('admin.users.edit', compact('user', 'memberships', 'membergroups', 'roles', 'paids'));
         }else{
              return redirect()->back();
              }
@@ -132,6 +134,7 @@ class AdminUsersController extends Controller
         $membergroup_id = Input::get('membergroup_id');
         $activeLocation = Input::get('active_location');
         $role = Input::get('role_id');
+        $paid = Input::get('paid_id');
 
 
        $user = User::findOrFail($id);
@@ -146,7 +149,8 @@ class AdminUsersController extends Controller
             'membership_id' => $request->input('membership_id'),
             'membergroup_id' => $request->input('membergroup_id'),
             'activeLocation' => $request ->input('active_location'),
-            'role_id' => $request->input('role_id')
+            'role_id' => $request->input('role_id'),
+            'paid_id' => $request->input('paid_id')
         ]);
 
         if(Auth::check()){

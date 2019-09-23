@@ -72,9 +72,9 @@ return [
         'array' => 'The :attribute must have less than :value items.',
     ],
     'lte' => [
-        'numeric' => 'The :attribute must be less than or equal :value.',
+        'numeric' => 'Invalid Member ID.',
         'file' => 'The :attribute must be less than or equal :value kilobytes.',
-        'string' => 'The :attribute must be less than or equal :value characters.',
+        'string' => 'Invalid Member ID.',
         'array' => 'The :attribute must not have more than :value items.',
     ],
     'max' => [

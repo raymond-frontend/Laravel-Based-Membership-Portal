@@ -21,7 +21,8 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'name', 'email', 'password', 'reference_id', 'language', 'bio', 'academics',
          'professional', 'experience', 'style','inspiration', 'membership_id','role_id',
-         'membergroup_id', 'slug', 'last_login_at', 'last_login_ip', 'location', 'paid_id'
+         'membergroup_id', 'slug', 'last_login_at', 'last_login_ip', 'location', 'paid_id',
+         'member_id'
     ];
 
     /**
@@ -68,12 +69,8 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function isAdmin(){
-        if($this->role['name'] == 'Administrator'){
-            return true;
-
-        }else{
-            return false;
-        }
+       return $this->role['name'] == 'Administrator';
+     
     }
 
  
