@@ -63,7 +63,7 @@ Welcome
                                         </a>
 
                                         <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-toggle="dropdown">
-										<img src="/uploads/avatars/{{Auth::User()->avatar}}" class="avatar img-fluid rounded-circle mr-1" alt="Chris Wood" /> <span class="text-dark">{{Auth::user()->name}}</span>
+										<img src="/uploads/avatars/{{Auth::User()->avatar}}" class="avatar img-fluid rounded-circle mr-1" alt="{{Auth::user()->name}}" /> <span class="text-dark">{{Auth::user()->name}}</span>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right">
 											<a style="color:green" class="dropdown-item" href="#"> Online</a>
@@ -102,8 +102,12 @@ Welcome
 								@if ($user->membergroup_id == '3')
 								<img src="/assets/img/avatars/verified.png" alt="">
 								@endif  </p>	
+							<p style="font-weight:500;" class=" profile-id">{{$user->headline}}</p>
 							<p class="profile-id"> Membership ID. <span style="font-weight:800;">{{$user->member_id}}</span> </p>
+							@if (Auth::User() == $user)
 							<div><a class="btn btn-primary btn-sm profile-cadre" href="javascrip:void(0)">{{$user->membership->name}}</a> <span class="float-right"><a class="btn btn-danger btn-sm profile-cadre" href="{{route('editUser', $user->id)}}">Update</a></span> </div>	
+							@endif
+								
 							</div>
 						</div> 
 						<div class="col-md-2 mb-3"></div>  
@@ -131,10 +135,6 @@ Welcome
 					<div class="row">
 						<div class="col-md-2 mb-3"></div>
                         <div class="col-md-8 mb-3 scard-2">	
-							<div><p class="profile-gutterx profile-about">Experience</p></div>
-							<div >
-						<div class="profile-gutterxz">{{$user->bio}}</div>	
-							<hr class="profile-gutterx">
 							<div><p class="profile-gutterx profile-about">Academic qualifications</p></div>
 						<div class="profile-gutterxz">{{$user->academics}}</div>	
 							<hr class="profile-gutterx">
@@ -145,7 +145,9 @@ Welcome
 						<div class="profile-gutterxz">{{$user->experience}}</div>	
 							<hr class="profile-gutterx">
 							<div><p class="profile-gutterx profile-about">Mediation Style</p></div>
-						<div class="profile-gutterxz">{{$user->style}}</div>
+						<div class="profile-gutterxz">
+							{{$user->style}}
+						</div>
 						<hr class="profile-gutterx">
 						<div><p class="profile-gutterx profile-about">Active Locations</p></div>
 						<div class="profile-gutterxz">{{$user->location}}</div>	

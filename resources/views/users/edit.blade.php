@@ -129,8 +129,16 @@ Welcome
                         {!! Form::text('name', null, ['class' =>'form-control gutterx']) !!}
                     </div>
 
+                    <div class="spacing">
+                        <label for="exampleFormControlTextarea1">Headline</label>
+                     </div>
+
+                    <div class="form-group row">
+                        {!! Form::textarea('headline',  null, ['class' =>'form-control gutterx', 'placeholder'=>'Expert Mediator, Mediator Advocate, Trainer ', 'rows' =>'2', 'maxlength'=>'180']) !!}
+                    </div>
+
                      <div class="spacing">
-                        <label for="exampleFormControlTextarea1">Bio</label>
+                        <label for="exampleFormControlTextarea1">Current Position and Background</label>
                      </div>
 
                     <div class="form-group row">
@@ -197,7 +205,7 @@ Welcome
                      </div>
 
                     <div class="form-group row">
-                        {!! Form::textarea('style',  null, ['class' =>'form-control gutterx', 'placeholder'=>'What is your style', 'rows' =>'3' ,'maxlength'=>'280']) !!}
+                        {!! Form::text('style',  null, ['class' =>'form-control gutterx spacing', 'placeholder'=>'Mediation style seperated by comma','maxlength'=>'280']) !!}
                     </div>
 
                      <div class="spacing">

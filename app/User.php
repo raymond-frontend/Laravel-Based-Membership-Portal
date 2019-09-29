@@ -22,7 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name', 'email', 'password', 'reference_id', 'language', 'bio', 'academics',
          'professional', 'experience', 'style','inspiration', 'membership_id','role_id',
          'membergroup_id', 'slug', 'last_login_at', 'last_login_ip', 'location', 'paid_id',
-         'member_id'
+         'member_id','headline', 'mediationstyle'
     ];
 
     /**

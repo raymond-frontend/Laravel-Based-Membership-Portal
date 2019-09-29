@@ -14,6 +14,7 @@ use App\Role;
 use App\Paid;
 use App\Mail\duesNotification;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Carbon\Carbon;
 
 
 
@@ -26,7 +27,7 @@ class AdminUsersController extends Controller
     }
 
     public function index()
-    {
+    {   
         $users = User::all();
         $latestUsers = User::latest()->orderBy('created_at', 'DESC')->paginate(100);
         $pendingUsers = $users->where('membergroup_id', '=', '1');
@@ -44,6 +45,50 @@ class AdminUsersController extends Controller
       
         
     }
+
+  
+
+    public function calculateDate()
+    {
+        $users = User::all();
+        $verifiedUsers= $users->where('membergroup_id', '=', '3');
+        foreach ($verifiedUsers as $key => $verifiedUser) {
+        $created = new Carbon($verifiedUser->created_at);
+        $now = Carbon::now();
+        $difference = $created->diff($now);
+        $count = $difference->format('%d');
+        if($count > 4)
+        {
+            return $verifiedUser->created_at;
+        }
+        }
+
+    }
+
+    public function getBannedUsers(){
+        $users = User::all();
+        $bannedUsers = $users->where('membergroup_id', '=', '2');
+        foreach($bannedUsers as $key => $bannedUser){
+            return $bannedUser;
+        }
+        
+    }
+
+    public function deleteBannedUsers()
+    {
+        User::where( 'membergroup_id', '=' , '2' )
+        ->where('paid_id', '=', '1')
+        ->delete();
+    }
+    
+
+      public function getDebtors()
+      {
+        $users = User::where('created_at', $this->calculateDate())
+        ->where('paid', 'Owing')
+        ->delete();
+        return redirect()->route('home');      
+      }
 
     public function verified()
     {

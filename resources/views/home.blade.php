@@ -164,9 +164,14 @@ Welcome
                                     
                                                 @foreach ($latestUsers as $fresh)
                                                 @if ($fresh->role_id == 1)
-                                                    <img class="rounded-circle mr-3" src="/uploads/avatars/{{$fresh->avatar}}" alt="{{$fresh->name}}" width="40" height="40">	<p style="line-height:1.5; color:#000; font-size:15px; !important;">
-											{{$fresh->name}}
-										</p>
+                                    <p>
+                                    <img class="rounded-circle mr-3" src="/uploads/avatars/{{$fresh->avatar}}" alt="{{$fresh->name}}" width="40" height="40"> 
+                                        <span class="float-right" style="vertical-align:center;">
+                                            {{$fresh->name}}      
+                                        </span> 
+                                    </p>     
+                                             
+
                                                 @endif
 											
 										@endforeach	
@@ -197,7 +202,7 @@ Welcome
                             <ul class="list-inline">
 
                                 <li class="list-inline-item">
-                                    <a class="text-muted" href="#">Terms of Service</a>
+                                <a class="text-muted" href="{{route('terms')}}">Terms of Service</a>
                                 </li>
                             </ul>
                         </div>
