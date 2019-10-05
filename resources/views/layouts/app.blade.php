@@ -4,6 +4,26 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+     <meta name="description" content="The Institute of Chartered Mediators and Conciliators (ICMC) is the professional body of practitioners in Nigeria that regulates and sets standards for the practice of Mediation and Conciliation" />
+    <meta name="author" content="Oyinlola Olasunkanmi Raymond. Fullstack Web developer, Kuala Lumpur, Malaysia." />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="The Institute of Chartered Mediators and Conciliators (ICMC) is the professional body of practitioners in Nigeria that regulates and sets standards for the practice of Mediation and Conciliation" />
+    <meta property="og:url" content="https://icmccommunity.com/" />
+    <meta property="og:site_name" content="ICMC Professional Community" />
+    <meta property="og:image" content="https://icmccommunity.com/assets/img/background/new-icmc-01.svg" />
+    <meta property="og:image:secure_url" content="https://icmccommunity.com/assets/img/background/new-icmc-01.svg" />
+    <meta property="og:image:width" content="981" />
+    <meta property="og:image:height" content="552" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:description" content="The Institute of Chartered Mediators and Conciliators (ICMC) is the professional body of practitioners in Nigeria that regulates and sets standards for the practice of Mediation and Conciliation" />
+    <meta name="twitter:title" content="ICMC Professional Community" />
+    <meta name="twitter:site" content="The Institute of Chartered Mediators and Conciliators (ICMC) is the professional body of practitioners in Nigeria that regulates and sets standards for the practice of Mediation and Conciliation" />
+    <meta name="twitter:image" content="https://icmccommunity.com/assets/img/background/new-icmc-01.svg" />
+    <meta name="twitter:creator" content="" />
+    <link rel="shortcut icon" href="/assets/img/logos/favicon.png" type="image/x-icon" />
+
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -20,6 +40,17 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+     <style>
+  .spix{
+    margin-top:120px;
+  }
+
+  @media only screen and (max-width: 1200px) {
+  .spix {
+    margin-top:0px;
+  }
+}
+  </style>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -88,5 +119,7 @@
             @yield('content')
         </main>
     </div>
+
+    @extends('layouts.footer')
 </body>
 </html>

@@ -50,8 +50,10 @@ Welcome
                     <i  class="hamburger align-self-center"></i>
                 </a>
 
-                <form class="form-inline d-none d-sm-inline-block">
-                    <input class="form-control form-control-no-border mr-sm-2" type="text" placeholder="Search other members..." aria-label="Search">
+                 <form action="{{route('search')}}" method="POST"role="search" class="form-inline d-none d-sm-inline-block">
+                {{ csrf_field() }}
+                    <input class="form-control form-control-no-border mr-sm-2" type="text" name="q" placeholder="Search other members..." aria-label="Search">
+               
                 </form>
 
                 <div class="navbar-collapse collapse">
@@ -103,7 +105,50 @@ Welcome
   							{{session('message')}}
 						@endif</div>
 						<div class="col-md-4 mb-3"></div>
-					</div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                           
+                              <h3>TERMS OF USE</h3>  
+ <p style="line-height:2; text-align:justify;">
+Esteemed Mediators, we thank you for validating your membership and updating your profile. Please note the following terms of use of the portal:<br>
+
+• Only Members who have validated their membership for 2019 may upload their profiles on the portal <br>
+
+• To log in to update your profile, kindly input your full name as your username and your membership number as your password <br>
+
+• Members may log in at any time to update their profiles <br>
+
+• Visitors to the ICMC website (www.icmcng.org) may view your profiles under the drop-down “ICMC Directory of Members.”<br>
+
+• By updating your membership profiles, you grant ICMC the unrestricted and irrevocable right to display your profile (only) on the ICMC website (www.icmcng.org) under the drop-down “ICMC Directory of Members.” <br>
+
+• Visitors will be able to view your profiles only. Only Members have access to edit their profiles <br>
+
+• Your password protects your profile, and you are solely responsible for keeping your password confidential and secure. You understand that you are responsible for all use of your username and password on the portal. If you believe there has been unauthorized access to your profile by third parties, please notify the ICMC Secretariat.<br>
+
+• A yearly clock has been placed on the portal. If you do not pay your annual membership dues as at when due, your membership privileges will be removed, and you will no longer enjoy your membership benefits <br>
+
+• It is imperative that Members be sincere in updating their profiles. Members are to refrain from posting any content which:<br>
+- is offensive, abusive, defamatory, pornographic, threatening, unlawful, harmful, vulgar, libelous, deceptive, fraudulent, invasive of another’s privacy, hateful or obscene<br>
+- is illegal, or intended to promote or commit an illegal act of any kind, including but not limited to violations of intellectual property rights, privacy rights, or proprietary rights of ICMC or a third party<br>
+- includes your password or purposely includes any other member’s password or intentionally includes personal data of third parties or is intended to solicit such personal data<br>
+- includes malicious content such as malware, Trojan horses, or viruses, or otherwise interferes with any member’s access to the portal<br>
+- impersonates or misrepresents your affiliation with another member, person, or entity, or is otherwise fraudulent, false, deceptive, or misleading<br>
+- involves commercial or sales activities, such as advertising, promotions, contests, or pyramid schemes, that are not expressly authorized by ICMC<br>
+- links to, references, or otherwise promotes commercial products or services, except as explicitly authorized by ICMC<br>
+- aimed at disrupting the operations of the ICMC membership portal<br>
+
+Members acknowledge and agree that engaging in any of the above may result in the immediate suspension of his/her membership profile, pending deliberation by the Executive Committee of the Institute of Chartered Mediators and Conciliators.  
+
+
+The Institute of Chartered Mediators and Conciliators takes no responsibility for any false information or misrepresentation contained in the profiles of Members
+                            </p>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
 
             </main>
             </div>

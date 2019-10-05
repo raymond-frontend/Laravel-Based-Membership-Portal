@@ -1,3 +1,4 @@
+
 @extends('layouts.master')
 @section('title')
 Welcome 
@@ -9,17 +10,17 @@ Welcome
             <div class="sidebar-content ">
                 <a class="sidebar-brand" href="http://icmcng.org">
                   
-                    <span class="align-middle"><img src="/assets/img/logos/logo.jpg" alt="" height="60"></span>
+				<span class="align-middle"><img src="/assets/img/logos/logo.jpg" alt="{{Auth::user()->name}}" height="60"></span>
                 </a>
 
-                <ul class="sidebar-nav">
+                 <ul class="sidebar-nav">
 
                     <li class="sidebar-item active">
                         <a href="#dashboards" data-toggle="collapse" class="sidebar-link">
                             <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
                         </a>
                         <ul id="dashboards" class="sidebar-dropdown list-unstyled collapse show">
-							 <li class="sidebar-item active"><a class="sidebar-link">Home</a></li>
+                        <li class="sidebar-item active"><a class="sidebar-link" href="{{route('home')}}">Home</a></li>
                         <li class="sidebar-item"><a class="sidebar-link" href="users/profile/{{Auth::User()->slug}}">My Profile</a></li>
                             <li class="sidebar-item"><a class="sidebar-link" href="users">Members</a></li>
                           <!--  <li class="sidebar-item"><a class="sidebar-link" href="dashboard-social.html">Social</a>-->
@@ -50,7 +51,7 @@ Welcome
                     <i  class="hamburger align-self-center"></i>
                 </a>
 
-            <form action="{{route('search')}}" method="POST"role="search" class="form-inline d-none d-sm-inline-block">
+                 <form action="{{route('search')}}" method="POST"role="search" class="form-inline d-none d-sm-inline-block">
                 {{ csrf_field() }}
                     <input class="form-control form-control-no-border mr-sm-2" type="text" name="q" placeholder="Search other members..." aria-label="Search">
                
@@ -64,22 +65,18 @@ Welcome
 
                                 <div class="list-group">
 
-
-                                    <li class="nav-item dropdown">
+ <li class="nav-item dropdown">
                                         <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-toggle="dropdown">
-                                            <i class="align-middle" data-feather="settings"></i>
+                                          
                                         </a>
 
                                         <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-toggle="dropdown">
-										<img src="/uploads/avatars/{{Auth::User()->avatar}}" class="avatar img-fluid rounded-circle mr-1" alt="{{Auth::User()->name}}" /> <span class="text-dark">{{Auth::user()->name}}</span>
+										<img src="/uploads/avatars/{{Auth::User()->avatar}}" class="avatar img-fluid rounded-circle mr-1" alt="{{Auth::user()->name}}" /> <span class="text-dark">{{Auth::user()->name}}</span>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a style="color:green" class="dropdown-item" href="Javascript:void()"><i class="align-middle mr-1"
-                                        data-feather="pie-chart"></i> Online</a>
-                                        <a style="color:red" class="dropdown-item" href="Javascript:void()"><i class="align-middle mr-1"
-										data-feather="pie-bar"></i> Membership ID: {{Auth::User()->member_id}}</a>
-                                            <a class="dropdown-item" href="users/profile/{{$user->slug}}"><i class="align-middle mr-1"
-										data-feather="user"></i> Profile</a>
+											<a style="color:green" class="dropdown-item" href="#"> Online</a>
+										<a style="color:red" class="dropdown-item" href="#">Membership ID: {{Auth::User()->member_id}}</a>
+                                           
                                               
                                            <!------ <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="pages-settings.html">Settings & Privacy</a>
@@ -98,7 +95,7 @@ Welcome
                     </div>
             </nav>
 
-            <main class="content" style="background-color:#f9fcf9">
+               <main class="content" style="background-color:#f9fcf9">
                 <div class="container-fluid p-0">
                       <div class="row">
                         <div class="col-md-4 mb-3"></div>
@@ -194,21 +191,20 @@ Welcome
                   
 
             </main>
-
-         <footer class="footer">
+            <footer class="footer">
                 <div class="container-fluid">
                     <div class="row text-muted">
                         <div class="col-6 text-left">
                             <ul class="list-inline">
 
                                 <li class="list-inline-item">
-                                <a class="text-muted" href="{{route('terms')}}">Terms of Service</a>
+                                    <a class="text-muted" href="#">Terms of Service</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="col-6 text-right">
                             <p class="mb-0">
-                                &copy; 2019 - <a href="http://icmcng.org" class="text-muted">ICMC</a>
+                                © 2019 - <a href="http://icmcng.org" class="text-muted">ICMC</a>
                             </p>
                         </div>
                     </div>
@@ -218,3 +214,5 @@ Welcome
             </div> 
 @endsection
  
+
+

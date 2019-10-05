@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use App\Notifications\duesNotification;
+use Illuminate\Support\Facades\Mail;
 use Auth;
 use Carbon\Carbon;
 
@@ -29,14 +31,16 @@ class LoginController extends Controller
          
         
         switch ($user) {
-            case ($user->membergroup->name == 'Owing'):
+            case ($user->paid_id == '3'):
                 $user-> update([
                 'last_login_at' =>Carbon::now()->toDateTimeString(),
                 'last_login_ip' => $request->getClientIp()
                 ]);
+                //Mail::to($user)->send(new duesNotification());
                 Auth::logout();
-                 return redirect('/login')->withErrors(['msg' => 'Please pay up your dues. Contact the secretariat on info@icmc.org']);
+                 return redirect('/login')->withErrors(['msg' => 'kindly pay your annual membership dues into the designated account. For inquiries, kindly contact the ICMC Secretariat (info@icmcng.org)']);
                 break;
+
 
             case ($user->isAdmin()):
                 $user-> update([
@@ -52,7 +56,7 @@ class LoginController extends Controller
                 'last_login_ip' => $request->getClientIp()
                 ]);
                 Auth::logout();
-                return redirect('/login')->withErrors(['msg'=>'You have been banned. Contact the secretariat on info@icmc.org']);   
+                return redirect('/login')->withErrors(['msg'=>'Greetings. Your profile has been flagged by the Administrator and disabled. Kindly contact the ICMC Secretariat (info@icmcng.org) for assistance']);   
                 
             default:
                 $user-> update([

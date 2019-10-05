@@ -12,16 +12,21 @@ Welcome
                     <span class="align-middle"><img src="/assets/img/logos/logo.jpg" alt="" height="60"></span>
                 </a>
 
-                <ul class="sidebar-nav">
+                  <ul class="sidebar-nav">
 
-                     <li class="sidebar-item active">
+                    <li class="sidebar-item active">
                         <a href="#dashboards" data-toggle="collapse" class="sidebar-link">
-                            <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Admin Dashboard</span>
+                            <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
                         </a>
                         <ul id="dashboards" class="sidebar-dropdown list-unstyled collapse show">
-                        <li class="sidebar-item active"><a class="sidebar-link" href="{{route('adminUsers')}}">Home</a></li>
-                        <li class="sidebar-item"><a class="sidebar-link" href="{{route('users')}}">Members</a></li>
-                        <li class="sidebar-item"><a class="sidebar-link" href="{{route('adminPosts')}}">Post</a></li>
+						<li class="sidebar-item active"><a class="sidebar-link" href="{{route('adminUsers')}}" >Home</a></li>
+						<li class="sidebar-item"><a class="sidebar-link" href="{{route('adminVerified')}}">Verified Members</a></li>
+						<li class="sidebar-item"><a class="sidebar-link" href="{{route('adminPaid')}}">Paid Dues</a></li>
+						<li class="sidebar-item"><a class="sidebar-link" href="{{route('adminPending')}}">Pending Users</a></li>
+						<li class="sidebar-item"><a class="sidebar-link" href="{{route('adminBanned')}}">Banned Users</a></li>
+						<li class="sidebar-item"><a class="sidebar-link" href="{{route('makeAnnouncement')}}">Create Announcement</a></li>
+                          <!--   <li class="sidebar-item"><a class="sidebar-link" href="posts">Post</a></li>
+                           <li class="sidebar-item"><a class="sidebar-link" href="dashboard-social.html">Social</a>-->
                             </li>
                         </ul>
                     </li>
@@ -107,7 +112,7 @@ Welcome
 
                     <div class="row">
                         <div class="col-md-8 mb-3 gutter">
-                      {!! Form::model($user, ['method' => 'PUT', 'action' =>['AdminUsersController@update', $user->id]])!!}
+                      {!! Form::model($user, ['method' => 'PATCH', 'action' =>['AdminUsersController@userUpdate', $user->id]])!!}
                     
 
                      <div class="spacing">
@@ -126,22 +131,42 @@ Welcome
                     <div class="form-group row">
                         {!! Form::select('membergroup_id', $membergroups, null, ['class' =>'form-control gutterx']) !!}
                     </div>
-
-                 <!---------    <div class="spacing">
-                     <label for="exampleFormControlTextarea1">Role</label>
-                    </div>
-
-                    <div class="form-group row">
-                        {!! Form::select('role_id', $roles, null, ['class' =>'form-control gutterx']) !!}
-                    </div>---->
-
-
                       
                      <div class="spacing">
                       
                      </div>
 
                      {!! Form::submit('Update Profile', ['class' =>'btn btn-primary']) !!}
+
+
+                    {!! Form::close() !!}
+
+                        </div>
+
+                   
+               
+                     
+                    </div>
+
+
+                      <div class="row">
+                        <div class="col-md-8 mb-3 gutter">
+                      {!! Form::model($user, ['method' => 'PUT', 'action' =>['AdminUsersController@paidUsers', $user->id]])!!}
+                    
+
+                     <div class="spacing">
+                     <label for="exampleFormControlTextarea1">Confirm Payment</label>
+                    </div>
+
+                    <div class="form-group row">
+                        {!! Form::select('paid_id', $paids, null, ['class' =>'form-control gutterx']) !!}
+                    </div>
+
+                     <div class="spacing">
+                      
+                     </div>
+
+                     {!! Form::submit('Update Paid', ['class' =>'btn btn-secondary']) !!}
 
 
                     {!! Form::close() !!}

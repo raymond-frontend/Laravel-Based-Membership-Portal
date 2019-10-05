@@ -36,7 +36,7 @@ Route::get('users/edit/{id}', 'UsersController@edit')->name('editUser')->where('
 Route::put('users/edit/{id}', 'UsersController@update')->name('update')->where('id', '\d+');
 Route::patch('users/edit/{id}', 'UsersController@changeAvatar')->name('changeAvatar')->where('id', '\d+');
 Route::get('terms-of-use', 'UsersController@terms')->name('terms');
-Route::get('deldeb', 'adminUsersController@getDebtors');
+
 
 //Admin User Route
 Route::get('admin/users', 'AdminUsersController@index')->name('adminUsers')->middleware('auth');
@@ -46,8 +46,11 @@ Route::get('admin/users/pending', 'AdminUsersController@pending')->name('adminPe
 Route::get('admin/users/banned', 'AdminUsersController@banned')->name('adminBanned')->middleware('auth');
 Route::get('admin/users/profile/{id}', 'AdminUsersController@show')->name('adminUser')->where('id', '\d+');
 Route::get('admin/users/edit/{id}', 'AdminUsersController@edit')->name('adminEditUser')->where('id', '\d+');
-Route::put('admin/users/edit/{id}', 'AdminUsersController@update')->name('adminUpdateUser')->where('id', '\d+');
+Route::patch('admin/users/edit/{id}', 'AdminUsersController@userUpdate')->name('adminUpdateUser')->where('id', '\d+');
+Route::put('admin/users/edit/{id}', 'AdminUsersController@paidUsers')->name('updatePaidUser')->where('id', '\d+');
 Route::get('admin/{id}', ['uses'=>'AdminUsersController@destroy', 'as' => 'deleteUser', 'middleware' => 'auth']);
+Route::get('updatedebtors', 'adminUsersController@getDebtors')->name('allDebtors');
+Route::get('debtors', 'adminUsersController@owing')->name('getDebtors');
 
 //Posts Route
 Route::get('admin_user/announcements', 'PostController@index')->name('adminPosts');

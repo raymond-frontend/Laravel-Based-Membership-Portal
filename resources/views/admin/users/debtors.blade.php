@@ -12,14 +12,14 @@ Welcome
 				<span class="align-middle"><img src="/assets/img/logos/logo.jpg" alt="{{Auth::user()->name}}" height="60"></span>
                 </a>
 
-                <ul class="sidebar-nav">
+                   <ul class="sidebar-nav">
 
                     <li class="sidebar-item active">
                         <a href="#dashboards" data-toggle="collapse" class="sidebar-link">
                             <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
                         </a>
                         <ul id="dashboards" class="sidebar-dropdown list-unstyled collapse show">
-						<li class="sidebar-item active"><a class="sidebar-link" >Home</a></li>
+						<li class="sidebar-item active"><a href="{{route('adminUsers')}}" class="sidebar-link" >Home</a></li>
 						<li class="sidebar-item"><a class="sidebar-link" href="{{route('adminVerified')}}">Verified Members</a></li>
 						<li class="sidebar-item"><a class="sidebar-link" href="{{route('adminPaid')}}">Paid Dues</a></li>
 						<li class="sidebar-item"><a class="sidebar-link" href="{{route('adminPending')}}">Pending Users</a></li>
@@ -55,9 +55,10 @@ Welcome
                     <i  class="hamburger align-self-center"></i>
                 </a>
 
-                <form action="{{route('search')}}" method="POST"role="search" class="form-inline d-none d-sm-inline-block">
+                 <form action="{{route('search')}}" method="POST"role="search" class="form-inline d-none d-sm-inline-block">
                 {{ csrf_field() }}
-                    <input class="form-control form-control-no-border mr-sm-2" type="text" name="q" placeholder="Search other members..." aria-label="Search">           
+                    <input class="form-control form-control-no-border mr-sm-2" type="text" name="q" placeholder="Search other members..." aria-label="Search">
+               
                 </form>
 
                 <div class="navbar-collapse collapse">
@@ -102,100 +103,21 @@ Welcome
             <main class="content" style="background-color:#f9fcf9">
                 <div class="container-fluid p-0">
 
-                  
-					<div class="row">
-						<div class="col-12 col-sm-6 col-xl d-flex">
-							<div class="card flex-fill">
-								<div class="card-body py-4">
-									<div class="media">
-										<div class="d-inline-block mt-2 mr-3">
-												<i class="feather-lg text-success" data-feather="users"></i>
-										</div>
-										<div class="media-body">
-										<h3 class="mb-2">{{$users->count()}}</h3>
-											<div class="mb-0">Registered Users</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-12 col-sm-6 col-xl d-flex">
-							<div class="card flex-fill">
-								<div class="card-body py-4">
-									<div class="media">
-										<div class="d-inline-block mt-2 mr-3">
-											<i class="feather-lg text-warning" data-feather="wifi"></i>
-										</div>
-										<div class="media-body">
-										<h3 class="mb-2">{{$pendingUsers->count()}}</h3>
-											<div class="mb-0">Pending Verification</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-12 col-sm-6 col-xl d-flex">
-							<div class="card flex-fill">
-								<div class="card-body py-4">
-									<div class="media">
-										<div class="d-inline-block mt-2 mr-3">
-											<i class="feather-lg text-success" data-feather="user-check"></i>
-										</div>
-										<div class="media-body">
-										<h3 class="mb-2">{{$verifiedUsers->count()}}</h3>
-											<div class="mb-0">Verified Members</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-12 col-sm-6 col-xl d-flex">
-							<div class="card flex-fill">
-								<div class="card-body py-4">
-									<div class="media">
-										<div class="d-inline-block mt-2 mr-3">
-											<i class="feather-lg text-danger" data-feather="dollar-sign"></i>
-										</div>
-										<div class="media-body">
-										<h3 class="mb-2">{{$paid->count()}}</h3>
-											<div class="mb-0">Paid</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-				<div class="col-12 col-sm-6 col-xl d-none d-xxl-flex">
-							<div class="card flex-fill">
-								<div class="card-body py-4">
-									<div class="media">
-										<div class="d-inline-block mt-2 mr-3">
-											<i class="feather-lg text-info" data-feather="user"></i>
-										</div>
-										<div class="media-body">
-										<h3 class="mb-2">{{$debtors->count()}}</h3>
-										<div class="mb-0">Owing</div>	
-											<a href="{{route('allDebtors')}}"><button class="btn btn-primary">Update</button></a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>	
-					</div>
 					
 					<div class="row">
 						<div class="col-md-4 mb-3"></div>
-						<div style="color:green" class="col-md-4 mb-3">@if(session('message'))
+						<div style="color:red; font-weight:700;" class="col-md-4 mb-3">@if(session('message'))
   							{{session('message')}}
 						@endif</div>
 						<div class="col-md-4 mb-3"></div>
-					</div>
-
-                             	<div class="row">
+                    </div>
+                    
+                  	<div class="row">
 						<div class="col-12 col-lg-6 col-xl-12 d-flex">
 							<div class="card flex-fill">
 								<div class="card-header">
 									
-									<h5 class="card-title mb-0">Latest Users</h5>
+									<h5 class="card-title mb-0">Debtors</h5>
 								</div>
 								<table id="datatables-dashboard-projects" class="table table-striped my-0">
 									<thead>
@@ -211,7 +133,7 @@ Welcome
 									</thead>
 									
 									<tbody>
-                                        @foreach ($latestUsers as $fresh)
+                                        @foreach ($debtors as $fresh)
                                             <tr>
 											<td><a style="text-decoration:none;" href="{{route('adminUser', $fresh->id)}}">{{$fresh->name}}</a></td>
 											<td class="d-none d-xl-table-cell">{{$fresh->member_id}}</td>
@@ -274,44 +196,12 @@ Welcome
 						
 					
 					</div>
-
-					
-
-					<div class="row">
+                    <div class="row">
 						<div class="col-12 col-lg-6 col-xl-12 d-flex">
-							{{$latestUsers->links()}}
+							{{$debtors->links()}}
 						</div>
 					</div>
-                    
-             
-           
-
-                   
-                    
-
-                  
-
             </main>
-
-         <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row text-muted">
-                        <div class="col-6 text-left">
-                            <ul class="list-inline">
-
-                                <li class="list-inline-item">
-                                    <a class="text-muted" href="#">Terms of Service</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-6 text-right">
-                            <p class="mb-0">
-                                &copy; 2019 - <a href="http://icmcng.org" class="text-muted">ICMC</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </footer>
             </div>
             </div> 
 @endsection

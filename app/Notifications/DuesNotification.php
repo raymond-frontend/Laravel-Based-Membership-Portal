@@ -41,9 +41,26 @@ class DuesNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->success()
+                    ->line('
+                    Dear Esteemed Mediator,
+                    Greetings from the Institute of Chartered Mediators and Conciliators. 
+
+                    Please, this is a reminder to pay your annual membership dues. Failure to pay your annual membership dues will amount to your profile being disabled. You will no longer be able to log in and edit your profile, and it will no longer be visible on the ICMC website.
+
+                    The membership dues for each cadre are as follows:
+                    Associate Member: N6,000
+                    Member: N10,000
+                    Fellow: N20,000
+
+                    Payment should please be made into the following account:
+                    Account name: ICMC Membership Dues Collection
+                    Bank name: Zenith bank
+                    Account number: 1015308125
+
+                    Thank you 
+                    ');
+
     }
 
     /**

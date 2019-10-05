@@ -43,8 +43,21 @@ class welcomeNotification extends Notification
         return (new MailMessage)
                     ->success()
                     ->subject('welcome')
-                    ->line('Dear ' . $this->user->name . ' , Welcome to ICMC membership portal. Kindly note that your Membership ID is **' . $this->user->member_id .'**. Login into the portal with your ID alongside your password')
-                    ->line('Thank you for using our application!');
+                    ->line(
+                    'Dear Esteemed Mediator, 
+                    Greetings from the Institute of Chartered Mediators and Conciliators. 
+
+                    Thank you for signing up. Please complete all fields honestly and upload your profile photo. Your profile will be visible to all visitors to the ICMC website under the drop down “ICMC Directory of Members.”
+
+                    It is important that you keep your Membership ID handy as this will enable you log into your profile at all times. 
+
+                    Please note that failure to pay your annual membership dues will amount to your profile being disabled. You will no longer be able to log in and edit your profile, and it will no longer be visible on the ICMC website. 
+
+                    For further inquiries, kindly contact the ICMC Secretariat (info@icmcng.org)
+
+                    Thank you. '
+                    );
+               
     }
 
     /**

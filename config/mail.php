@@ -57,7 +57,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'info@expovira.com'),
-        'name' => env('MAIL_FROM_NAME', 'ICMC Membership Portal'),
+        'name' => env('MAIL_FROM_NAME', 'ICMC Community'),
     ],
 
     /*
