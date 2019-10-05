@@ -23,8 +23,8 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
-//Route::get('home', 'HomeController@index')->name('home')->middleware('verified');
-Route::get('home', 'HomeController@index')->name('home');
+Route::get('home', 'HomeController@index')->name('home')->middleware('verified');
+//Route::get('home', 'HomeController@index')->name('home');
 
 /****Route::get('/csv', 'CsvFile@index')->name('importPage');
 Route::post('csv/import', 'CsvFile@csv_import')->name('import');***/
