@@ -12,7 +12,7 @@ class MembersController extends Controller
     public function index()
     {
         $members = DB::table('users')->orderBy('name')->where('membergroup_id', '=', '3')->paginate(15);
-        return view('members.index', compact('users', 'members'));
+        return view('members.index', compact('members'));
     }
 
 
